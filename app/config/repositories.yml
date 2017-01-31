@@ -3,3 +3,8 @@ services:
         class: AppBundle\Repository\MemberRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: ["AppBundle:Member"]
+
+    app.user_repository:
+        class: AppBundle\Repository\UserRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: ["AppBundle:User"]

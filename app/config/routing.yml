@@ -4,6 +4,18 @@ security_login:
     defaults:  { _controller: app.security_controller:loginAction }
     methods: [GET, POST]
 
+security_logout:
+    path:      /logout
+
+registration:
+    path:      /register
+    defaults:  { _controller: app.registration_controller:registerAction }
+    methods: [GET, POST]
+    requirements:
+        username: \d+
+        email: \d+
+        plainPassword: \d+
+
 dashboard:
     path:      /
     defaults:  { _controller: app.dashboard_controller:indexAction }

@@ -3,3 +3,9 @@ services:
         class: AppBundle\Service\MemberService
         arguments:
             - "@app.member_repository"
+
+    app.registration_service:
+        class: AppBundle\Service\RegistrationService
+        arguments:
+            - "@app.user_repository"
+            - "@security.encoder_factory"

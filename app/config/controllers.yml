@@ -14,5 +14,9 @@ services:
         class: AppBundle\Controller\MemberController
         arguments: ['@templating', '@app.member_service', '@form.factory', '@session', '@router']
 
+    app.registration_controller:
+        class: AppBundle\Controller\RegistrationController
+        arguments: ['@templating', '@app.registration_service', '@form.factory', '@session', '@router']
+
 
 

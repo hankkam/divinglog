@@ -48,6 +48,11 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
+     */
+    private $plainPassword;
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
@@ -127,6 +132,22 @@ class User implements UserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**
@@ -241,8 +262,9 @@ class User implements UserInterface, \Serializable
                 new Assert\NotBlank(array('message' =>  'Required')),
                 new Assert\Email(),
             ))
-            ->addPropertyConstraints('password', array(
+            ->addPropertyConstraints('plainPassword', array(
                 new Assert\NotBlank(array('message' =>  'Required')),
+                new Assert\Length(array('max' => 4096)),
             ))
         ;
     }

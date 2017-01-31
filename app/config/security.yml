@@ -23,11 +23,13 @@ security:
             pattern:    ^/
             http_basic: ~
             provider: our_db_provider
+            logout:
+                path:   /logout
+                target: /
 
-
-#        dev:
-#            pattern: ^/(_(profiler|wdt)|css|images|js)/
-#            security: false
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
 
 
 #    access_control:

@@ -13,18 +13,13 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class UserType extends AbstractType
 {
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email', TextType::class, array('required' => false))
-            ->add('password', TextType::class, array('required' => false))
-            ->add('lastOnline', DateType::class, array('required' => false))
+            ->add('lastOnline', DateType::class, array('required' => false, 'disabled' => true))
             ->add('expires', DateType::class, array('required' => false))
-            ->add('blocked', ChoiceType::class, array(
+            ->add('isActive', ChoiceType::class, array(
                 'choices' => array(
                     'Yes' => '1',
                     'No' => '0',
