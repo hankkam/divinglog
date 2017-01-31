@@ -1,0 +1,174 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Diving Log Members{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+        <h1 class="page-header">Members</h1>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Member details
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#memberDetails">
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="memberDetails" class="panel-body collapse">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-xs-2">
+                                        {{ form_row(form.initials) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        {{ form_row(form.inserts) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        {{ form_row(form.lastName) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        {{ form_row(form.firstName) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-2">
+                                        <p class="visible-lg-block"></p>
+                                            {{ form_row(form.gender) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <p class="visible-lg-block"></p>
+                                        {{ form_row(form.dateOfBirth) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-xs-9">
+                                        {{ form_row(form.streetName) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        {{ form_row(form.streetNumber) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-2">
+                                        {{ form_row(form.postalCode) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-9">
+                                        {{ form_row(form.city) }}
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-11">
+                                        {{ form_row(form.country) }}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        Login credentials
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#loginCredentials">
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="loginCredentials" class="panel-body collapse in">
+                        <div class="row">
+                            {{ form_start(form) }}
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form_row(form.user.email) }}
+                                    <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_row(form.user.password) }}
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    {{ form_row(form.user.lastOnline) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(form.user.expires) }}
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    {{ form_row(form.user.blocked) }}
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default" >
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-lg-9">
+                                <a href="{{ path('member') }}" class="btn btn-default" >Cancel</a>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    {{ form_row(form._token) }}
+    {{ form_end(form) }}
+{% endblock %}

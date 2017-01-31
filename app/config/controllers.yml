@@ -1,0 +1,18 @@
+services:
+    app.security_controller:
+        class: AppBundle\Controller\SecurityController
+        arguments: ['@templating', '@security.authentication_utils']
+
+    app.dashboard_controller:
+        class: AppBundle\Controller\DashboardController
+        arguments: ['@templating']
+
+    form_factory_interface:
+      class: Symfony\Component\Form\FormFactoryInterface
+
+    app.member_controller:
+        class: AppBundle\Controller\MemberController
+        arguments: ['@templating', '@app.member_service', '@form.factory', '@session', '@router']
+
+
+

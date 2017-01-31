@@ -1,0 +1,5 @@
+services:
+    app.member_repository:
+        class: AppBundle\Repository\MemberRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: ["AppBundle:Member"]
