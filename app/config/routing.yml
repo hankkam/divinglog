@@ -1,20 +1,5 @@
-## app/config/routing.yml
-security_login:
-    path:      /login
-    defaults:  { _controller: app.security_controller:loginAction }
-    methods: [GET, POST]
-
-security_logout:
-    path:      /logout
-
-registration:
-    path:      /register
-    defaults:  { _controller: app.registration_controller:registerAction }
-    methods: [GET, POST]
-    requirements:
-        username: \d+
-        email: \d+
-        plainPassword: \d+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 dashboard:
     path:      /
