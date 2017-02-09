@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     {% stylesheets '@css_sb_admin_2' %}
@@ -15,7 +15,6 @@
 {% endblock %}
 
 {% block body %}
-    {% block content %}
 
         <div>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -43,5 +42,4 @@
             {% endblock fos_user_content %}
         </div>
 
-    {% endblock %}
 {% endblock %}
