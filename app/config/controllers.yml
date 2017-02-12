@@ -5,7 +5,7 @@ services:
 
     app.dashboard_controller:
         class: AppBundle\Controller\DashboardController
-        arguments: ['@templating']
+        arguments: ['@templating', '@security.token_storage']
 
     form_factory_interface:
       class: Symfony\Component\Form\FormFactoryInterface
