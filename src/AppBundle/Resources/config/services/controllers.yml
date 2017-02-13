@@ -1,0 +1,9 @@
+services:
+    app.member_controller:
+        class: AppBundle\Controller\MemberController
+        arguments: ['@templating', '@app.member_service', '@form.factory', '@session', '@router']
+
+    app.dashboard_controller:
+        class: AppBundle\Controller\DashboardController
+        arguments: ['@templating', '@security.token_storage']
+
