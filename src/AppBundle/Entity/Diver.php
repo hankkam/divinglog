@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 /**
  * @ORM\Entity
  * @ORM\Table(name="diver")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DiverRepository")
  */
 class Diver
 {

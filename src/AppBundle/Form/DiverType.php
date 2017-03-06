@@ -2,13 +2,11 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use AppBundle\Form\UserType;
 
 /**
  * Diver type.
@@ -40,7 +38,6 @@ class DiverType extends AbstractType
             ->add('postalCode', TextType::class, array('required' => false))
             ->add('city', TextType::class, array('required' => false))
             ->add('country', TextType::class, array('required' => false))
-            ->add('user', UserType::class, array('data_class' => User::class))
         ;
     }
 }
