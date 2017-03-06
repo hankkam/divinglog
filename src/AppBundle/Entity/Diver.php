@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -316,21 +315,6 @@ class Diver
     }
 
     /**
-     * @return \AppBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param \AppBundle\Entity\User|null $user
-     */
-    public function setUser(User $user = null)
-    {
-        $this->user = $user;
-    }
-    /**
      * Load validator metadata.
      *
      * @param \Symfony\Component\Validator\Mapping\ClassMetadata $metadata
@@ -338,6 +322,9 @@ class Diver
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata
+            ->addPropertyConstraints('initials', array(
+                new Assert\NotBlank(array('message' =>  'Required')),
+            ))
             ->addPropertyConstraints('firstName', array(
                 new Assert\NotBlank(array('message' =>  'Required')),
                 new Assert\Regex(array(
@@ -346,9 +333,6 @@ class Diver
                     'message' => 'Invalid characters.'
                 )),
             ))
-            ->addPropertyConstraints('initials', array(
-                new Assert\NotBlank(array('message' =>  'Required')),
-            ))
             ->addPropertyConstraints('lastName', array(
                 new Assert\NotBlank(array('message' =>  'Required')),
             ))
@@ -356,9 +340,6 @@ class Diver
                 new Assert\Date(array('message' => 'Invalid date')),
             ))
             ->addPropertyConstraints('gender', array(
-                new Assert\NotNull(),
-            ))
-            ->addPropertyConstraints('user', array(
                 new Assert\NotNull(),
             ))
         ;
