@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -106,6 +107,16 @@ class Diver
      */
     private $phoneNumber;
 
+    /**
+     * One diver has Many certifications.
+     *
+     * @OneToMany(targetEntity="certificate", mappedBy="diver")
+     */
+    private $certificates;
+
+    public function __construct() {
+        $this->certificates = new ArrayCollection();
+    }
     /**
      * @return int
      */
