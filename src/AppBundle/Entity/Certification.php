@@ -8,8 +8,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="divercertification")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\DiverCertificationRepository")
+ * @ORM\Table(name="certification")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CertificationRepository")
  */
 class Certification
 {
