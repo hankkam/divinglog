@@ -21,7 +21,7 @@ class LoginType extends AbstractType
         $builder
             ->add('email', TextType::class)
             ->add('password', TextType::class)
-            ->add('rememberMe', CheckboxType::class)
+            ->add('rediverMe', CheckboxType::class)
         ;
     }
 }

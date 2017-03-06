@@ -11,9 +11,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use AppBundle\Form\UserType;
 
 /**
- * Member type.
+ * Diver type.
  */
-class MemberType extends AbstractType
+class DiverType extends AbstractType
 {
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder

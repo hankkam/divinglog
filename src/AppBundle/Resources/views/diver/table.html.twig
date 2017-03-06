@@ -3,7 +3,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Members
+                Divers
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -18,18 +18,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for member in members %}
+                    {% for diver in divers %}
                         <tr class="odd gradeX">
-                            <td>{{ member.firstname }}</td>
-                            <td>{{ member.initials }}</td>
-                            <td>{{ member.inserts }}</td>
-                            <td>{{ member.lastname }}</td>
+                            <td>{{ diver.firstname }}</td>
+                            <td>{{ diver.initials }}</td>
+                            <td>{{ diver.inserts }}</td>
+                            <td>{{ diver.lastname }}</td>
                             <td>
                                 <div class="pull-right">
-                                    {#<a href="{{ path('member_get', {'id' : member.id}) }}">#}
+                                    {#<a href="{{ path('diver_get', {'id' : diver.id}) }}">#}
                                         {#<button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-eye"></i></button>#}
                                     {#</a>#}
-                                    <a href="{{ path('member_edit', {'id' : member.id}) }}">
+                                    <a href="{{ path('diver_edit', {'id' : diver.id}) }}">
                                     <button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></button>
                                     </a>
                                 </div>
@@ -40,7 +40,7 @@
                 </table>
                 <!-- /.table-responsive -->
                 <div class="well">
-                    <a href="{{ path('member_add') }}" data-toggle="modal" class="btn btn-success">Add new</a>
+                    <a href="{{ path('diver_add') }}" data-toggle="modal" class="btn btn-success">Add new</a>
                 </div>
             </div>
             <!-- /.panel-body -->

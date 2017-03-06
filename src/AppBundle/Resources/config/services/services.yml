@@ -1,5 +1,5 @@
 services:
-    app.member_service:
-        class: AppBundle\Service\MemberService
+    app.diver_service:
+        class: AppBundle\Service\DiverService
         arguments:
-            - "@app.member_repository"
+            - "@app.diver_repository"

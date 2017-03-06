@@ -1,25 +1,25 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Diving Log Members{% endblock %}
+{% block title %}Divers{% endblock %}
 
 {% block content %}
     {{ form_start(form) }}
-        <h1 class="page-header">Members</h1>
+        <h1 class="page-header">Divers</h1>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Member details
+                        Diver details
                         <div class="pull-right">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#memberDetails">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#diverDetails">
                                     <span class="glyphicon glyphicon-chevron-down"></span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div id="memberDetails" class="panel-body collapse">
+                    <div id="diverDetails" class="panel-body collapse">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -155,7 +155,7 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-lg-9">
-                                <a href="{{ path('member') }}" class="btn btn-default" >Cancel</a>
+                                <a href="{{ path('diver') }}" class="btn btn-default" >Cancel</a>
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </div>

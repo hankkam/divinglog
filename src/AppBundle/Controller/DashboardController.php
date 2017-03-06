@@ -30,9 +30,13 @@ class DashboardController
      */
     public function indexAction(Request $request)
     {
-        dump($this->tokenStorage->getToken()->getUser());
+//        dump($this->tokenStorage->getToken()->getUser());
+//        $data = array(
+//            'username' => $this->tokenStorage->getToken()->getUser()->getUserName()
+//        );
+
         $data = array(
-            'username' => $this->tokenStorage->getToken()->getUser()->getUserName()
+            'username' => 'JustMe'
         );
 
         return $this->templating->renderResponse('AppBundle:dashboard:index.html.twig', $data);

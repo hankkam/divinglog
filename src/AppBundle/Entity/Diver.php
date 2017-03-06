@@ -8,12 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
- * Member
- *
- * @ORM\Table(name="member", indexes={@ORM\Index(name="user_id", columns={"user_id"})})
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MemberRepository")
+ * @ORM\Entity
+ * @ORM\Table(name="diver")
  */
-class Member
+class Diver
 {
     /**
      * @var integer
@@ -107,16 +105,6 @@ class Member
      * @ORM\Column(name="phonenumber", type="string", length=50, nullable=false)
      */
     private $phoneNumber;
-
-    /**
-     * @var \AppBundle\Entity\User;
-     *
-     * @ORM\ManyToOne(targetEntity="User", cascade={"persist", "remove"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
-     */
-    private $user;
 
     /**
      * @return int

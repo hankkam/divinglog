@@ -6,31 +6,31 @@ dashboard:
     defaults:  { _controller: app.dashboard_controller:indexAction }
     methods: [GET]
 
-member:
-    path:      /member
-    defaults:  { _controller: app.member_controller:allAction }
+diver:
+    path:      /diver
+    defaults:  { _controller: app.diver_controller:allAction }
     methods: [GET]
 
-member_create:
-    path:      /member/add
-    defaults:  { _controller: app.member_controller:addAction }
+diver_create:
+    path:      /diver/add
+    defaults:  { _controller: app.diver_controller:addAction }
     methods: [POST]
 
-member_get:
-    path:      /member/{id}
-    defaults:  { _controller: app.member_controller:getAction }
+diver_get:
+    path:      /diver/{id}
+    defaults:  { _controller: app.diver_controller:getAction }
     methods: [GET]
     requirements:
         id: \d+
 
-member_add:
-    path:      /member/add
-    defaults:  { _controller: app.member_controller:addAction }
+diver_add:
+    path:      /diver/add
+    defaults:  { _controller: app.diver_controller:addAction }
     methods: [GET]
 
-member_edit:
-    path:      /member/{id}/edit
-    defaults:  { _controller: app.member_controller:editAction }
+diver_edit:
+    path:      /diver/{id}/edit
+    defaults:  { _controller: app.diver_controller:editAction }
     methods: [GET, POST]
     requirements:
         id: \d+

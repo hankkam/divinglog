@@ -64,6 +64,7 @@ class ForcedLogoutListener
         }
 
         $accessToken = $this->tokenStorage->getToken();
+        dump($accessToken);
 
         /** @var User $user */
         $user = $accessToken->getUser();
@@ -87,7 +88,7 @@ class ForcedLogoutListener
     protected function isUserLoggedIn()
     {
         try {
-            return $this->authChecker->isGranted('IS_AUTHENTICATED_REMEMBERED');
+            return $this->authChecker->isGranted('IS_AUTHENTICATED_REDIVERED');
         } catch (AuthenticationCredentialsNotFoundException $exception) {
             // Ignoring this exception.
         }
@@ -122,7 +123,7 @@ class ForcedLogoutListener
 //        if (null !== $response) {
 //            foreach ([
 //                         $this->sessionName,
-//                         $this->rememberMeSessionName,
+//                         $this->rediverMeSessionName,
 //                     ] as $cookieName) {
 //                $response->headers->clearCookie($cookieName);
 //            }

@@ -2,9 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Member;
-use AppBundle\Form\MemberType;
-use AppBundle\Service\MemberService;
+use AppBundle\Entity\Diver;
+use AppBundle\Form\DiverType;
+use AppBundle\Service\DiverService;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -13,15 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
- * Member controller.
+ * Diver controller.
  */
-class MemberController
+class DiverController
 {
     /** @var \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface */
     private $templating;
 
-    /** @var \AppBundle\Service\MemberService */
-    private $memberService;
+    /** @var \AppBundle\Service\DiverService */
+    private $diverService;
 
     /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
@@ -34,20 +34,20 @@ class MemberController
 
     /**
      * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
-     * @param \AppBundle\Service\MemberService $memberService
+     * @param \AppBundle\Service\DiverService $diverService
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
      */
     public function __construct(
         EngineInterface $templating,
-        MemberService $memberService,
+        DiverService $diverService,
         FormFactoryInterface $formFactory,
         Session $session,
         Router $router
     ) {
         $this->templating = $templating;
-        $this->memberService = $memberService;
+        $this->diverService = $diverService;
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->router = $router;
@@ -60,11 +60,11 @@ class MemberController
      */
     public function allAction(Request $request)
     {
-        $members = $this->memberService->getMembers();
+        $divers = $this->diverService->getDivers();
 
         $data =  array(
-            'members' => $members,
-            'page' => 'AppBundle:member:table.html.twig',
+            'divers' => $divers,
+            'page' => 'AppBundle:diver:table.html.twig',
         );
 
         return $this->render($data);
@@ -77,14 +77,14 @@ class MemberController
      */
     public function getAction($id)
     {
-        $member = $this->memberService->getMember($id);
-        $form = $this->formFactory->create(MemberType::class, $member);
+        $diver = $this->diverService->getDiver($id);
+        $form = $this->formFactory->create(DiverType::class, $diver);
 
         $data =  array(
             'form' => $form->createView(),
         );
 
-        return $this->templating->renderResponse("AppBundle:member:add.html.twig", $data);
+        return $this->templating->renderResponse("AppBundle:diver:add.html.twig", $data);
     }
 
     /**
@@ -94,44 +94,44 @@ class MemberController
      */
     public function addAction(Request $request)
     {
-        $member = new Member();
-        $form = $this->formFactory->create(MemberType::class, $member);
+        $diver = new Diver();
+        $form = $this->formFactory->create(DiverType::class, $diver);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->memberService->save($member);
+            $this->diverService->save($diver);
 
-            $this->session->getFlashBag()->add('notice', 'Member has been added successfully');
+            $this->session->getFlashBag()->add('notice', 'Diver has been added successfully');
 
-            return new RedirectResponse($this->router->generate('member'));
+            return new RedirectResponse($this->router->generate('diver'));
         }
         $data =  array('form' => $form->createView());
 
-        return $this->templating->renderResponse("AppBundle:member:add.html.twig", $data);
+        return $this->templating->renderResponse("AppBundle:diver:add.html.twig", $data);
     }
 
     /**
-     * @param \AppBundle\Entity\Member $member
+     * @param \AppBundle\Entity\Diver $diver
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|
      *         \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Member $member, Request $request)
+    public function editAction(Diver $diver, Request $request)
     {
-        $form = $this->formFactory->create(MemberType::class, $member);
+        $form = $this->formFactory->create(DiverType::class, $diver);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->memberService->save($member);
-            $this->session->getFlashBag()->add('notice', 'Member has been modified successfully');
+            $this->diverService->save($diver);
+            $this->session->getFlashBag()->add('notice', 'Diver has been modified successfully');
 
-            return new RedirectResponse($this->router->generate('member'));
+            return new RedirectResponse($this->router->generate('diver'));
         }
 
         $data =  array('form' => $form->createView());
 
-        return $this->templating->renderResponse("AppBundle:member:add.html.twig", $data);
+        return $this->templating->renderResponse("AppBundle:diver:add.html.twig", $data);
     }
 
     /**
@@ -141,6 +141,6 @@ class MemberController
      */
     private function render(array $data)
     {
-        return $this->templating->renderResponse("AppBundle:member:index.html.twig", $data);
+        return $this->templating->renderResponse("AppBundle:diver:index.html.twig", $data);
     }
 }

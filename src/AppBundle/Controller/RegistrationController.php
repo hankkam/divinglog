@@ -68,9 +68,9 @@ class RegistrationController
 
             $this->registrationService->register($user);
 
-            $this->session->getFlashBag()->add('notice', 'Member has been added successfully');
+            $this->session->getFlashBag()->add('notice', 'Diver has been added successfully');
 
-            return new RedirectResponse($this->router->generate('member'));
+            return new RedirectResponse($this->router->generate('diver'));
         }
         $data =  array('form' => $form->createView());
 
