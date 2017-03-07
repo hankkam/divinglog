@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Diver;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -14,8 +15,6 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 class Certification
 {
     /**
-     * @var integer
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -25,41 +24,169 @@ class Certification
     /**
      * Many Certifications have One diver.
      *
-     * @var \AppBundle\Entity\Diver
-     *
      * @ManyToOne(targetEntity="diver", inversedBy="certifications")
      *
      * @JoinColumn(name="diver_id", referencedColumnName="id")
      */
     private $diver;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="certifyingorganization", type="string", length=50, nullable=false)
-     */
+    /** @ORM\Column(name="certifyingorganization", type="string", length=50, nullable=false) */
     private $certifyingOrganization;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="certification", type="string", length=50, nullable=false)
-     */
+    /** @ORM\Column(name="certification", type="string", length=50, nullable=false) */
     private $certification;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="number", type="string", length=50, nullable=false)
-     */
-    private $number;
+    /** @ORM\Column(name="registrationnumber", type="string", length=50, nullable=false) */
+    private $registrationNumber;
+
+    /** @ORM\Column(name="dateobtained", type="datetime", length=50, nullable=false) */
+    private $dateObtained;
+
+    /** @ORM\Column(name="instructorname", type="string", length=50, nullable=true) */
+    private $instructorName;
+
+    /** @ORM\Column(name="instructorregistrationnumber", type="string", length=50, nullable=true) */
+    private $instructorRegistrationNumber;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="dateObtained", type="datetime", length=50, nullable=false)
+     * @return mixed
      */
-    private $dateObtained;
+    public function getDiver()
+    {
+        return $this->diver;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Diver $diver
+     *
+     * @return Certification
+     */
+    public function setDiver(Diver $diver)
+    {
+        $this->diver = $diver;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCertifyingOrganization()
+    {
+        return $this->certifyingOrganization;
+    }
+
+    /**
+     * @param mixed $certifyingOrganization
+     *
+     * @return Certification
+     */
+    public function setCertifyingOrganization($certifyingOrganization)
+    {
+        $this->certifyingOrganization = $certifyingOrganization;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCertification()
+    {
+        return $this->certification;
+    }
+
+    /**
+     * @param mixed $certification
+     *
+     * @return Certification
+     */
+    public function setCertification($certification)
+    {
+        $this->certification = $certification;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegistrationNumber()
+    {
+        return $this->registrationNumber;
+    }
+
+    /**
+     * @param mixed $registrationNumber
+     *
+     * @return Certification
+     */
+    public function setRegistrationNumber($registrationNumber)
+    {
+        $this->registrationNumber = $registrationNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateObtained()
+    {
+        return $this->dateObtained;
+    }
+
+    /**
+     * @param mixed $dateObtained
+     *
+     * @return Certification
+     */
+    public function setDateObtained($dateObtained)
+    {
+        $this->dateObtained = $dateObtained;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInstructorName()
+    {
+        return $this->instructorName;
+    }
+
+    /**
+     * @param mixed $instructorName
+     *
+     * @return Certification
+     */
+    public function setInstructorName($instructorName)
+    {
+        $this->instructorName = $instructorName;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInstructorRegistrationNumber()
+    {
+        return $this->instructorRegistrationNumber;
+    }
+
+    /**
+     * @param mixed $instructorRegistrationNumber
+     *
+     * @return Certification
+     */
+    public function setInstructorRegistrationNumber($instructorRegistrationNumber)
+    {
+        $this->instructorRegistrationNumber = $instructorRegistrationNumber;
+
+        return $this;
+    }
 
     /**
      * Load validator metadata.
@@ -75,4 +202,3 @@ class Certification
         ;
     }
 }
-

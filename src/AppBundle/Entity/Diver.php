@@ -15,96 +15,50 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 class Diver
 {
     /**
-     * @var integer
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=80, nullable=false)
-     */
+    /** @ORM\Column(name="firstname", type="string", length=80, nullable=false) */
     private $firstName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=80, nullable=false)
-     */
+    /** @ORM\Column(name="lastname", type="string", length=80, nullable=false) */
     private $lastName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="inserts", type="string", length=80, nullable=false)
-     */
+    /** @ORM\Column(name="inserts", type="string", length=80, nullable=true) */
     private $inserts;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="initials", type="string", length=80, nullable=false)
-     */
+    /** @ORM\Column(name="initials", type="string", length=80, nullable=false) */
     private $initials;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateofbirth", type="datetime", nullable=false)
-     */
+    /** @ORM\Column(name="dateofbirth", type="datetime", nullable=false) */
     private $dateOfBirth;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="gender", type="string", nullable=false)
-     */
+    /** @ORM\Column(name="gender", type="string", nullable=false) */
     private $gender;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="streetname", type="string", length=50, nullable=false)
-     */
+    /** @ORM\Column(name="streetname", type="string", length=50, nullable=true) */
     private $streetName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="streetnumber", type="string", length=50, nullable=false)
-     */
+    /** @ORM\Column(name="streetnumber", type="string", length=50, nullable=true) */
     private $streetNumber;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="postalcode", type="string", length=50, nullable=false)
-     */
+    /** @ORM\Column(name="postalcode", type="string", length=50, nullable=true) */
     private $postalCode;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=50, nullable=false)
-     */
+    /** @ORM\Column(name="city", type="string", length=50, nullable=true) */
     private $city;
 
     /**
-     * @var string
+     * @ManyToOne(targetEntity="country")
      *
-     * @ORM\Column(name="country", type="string", length=50, nullable=false)
+     * @JoinColumn(name="country_id", referencedColumnName="id")
      */
     private $country;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="phonenumber", type="string", length=50, nullable=false)
-     */
+    /** @ORM\Column(name="phonenumber", type="string", length=50, nullable=true) */
     private $phoneNumber;
 
     /**
@@ -117,6 +71,7 @@ class Diver
     public function __construct() {
         $this->certificates = new ArrayCollection();
     }
+
     /**
      * @return int
      */
@@ -294,7 +249,7 @@ class Diver
     }
 
     /**
-     * @return string
+     * @return \AppBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -302,11 +257,15 @@ class Diver
     }
 
     /**
-     * @param string $country
+     * @param \AppBundle\Entity\Country
+     *
+     * @return $this
      */
-    public function setCountry($country)
+    public function setCountry(Country $country)
     {
         $this->country = $country;
+
+        return $this;
     }
 
     /**
