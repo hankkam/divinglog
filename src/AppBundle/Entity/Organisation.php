@@ -34,7 +34,7 @@ class Organisation
      */
     private $country;
 
-    /** @ORM\Column(name="organisationType", type="string", length=30, nullable=false) */
+    /** @ORM\Column(name="organisationtype", type="string", length=30, nullable=false) */
     private $organisationType;
 
     /**
@@ -120,19 +120,19 @@ class Organisation
     /**
      * @return mixed
      */
-    public function getType()
+    public function getOrganisationType()
     {
-        return $this->type;
+        return $this->organisationType;
     }
 
     /**
-     * @param int $type
+     * @param int $organisationType
      *
      * @return $this
      */
-    public function setType($type)
+    public function setOrganisationType($organisationType)
     {
-        $this->type = $type;
+        $this->organisationType = $organisationType;
 
         return $this;
     }
