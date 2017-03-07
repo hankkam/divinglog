@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Diver;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -24,9 +23,9 @@ class Certification
     /**
      * Many Certifications have One diver.
      *
-     * @ManyToOne(targetEntity="diver", inversedBy="certifications")
+     * @ORM\ManyToOne(targetEntity="diver", inversedBy="certifications")
      *
-     * @JoinColumn(name="diver_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="diver_id", referencedColumnName="id")
      */
     private $diver;
 

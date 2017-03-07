@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Country;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -52,9 +53,9 @@ class Diver
     private $city;
 
     /**
-     * @ManyToOne(targetEntity="country")
+     * @ORM\ManyToOne(targetEntity="country")
      *
-     * @JoinColumn(name="country_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     private $country;
 
@@ -64,10 +65,13 @@ class Diver
     /**
      * One diver has Many certifications.
      *
-     * @OneToMany(targetEntity="certificate", mappedBy="diver")
+     * @ORM\OneToMany(targetEntity="certification", mappedBy="diver")
      */
     private $certificates;
 
+    /**
+     * Constructor.
+     */
     public function __construct() {
         $this->certificates = new ArrayCollection();
     }

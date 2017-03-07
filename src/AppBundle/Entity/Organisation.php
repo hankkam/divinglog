@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Country;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -27,14 +28,14 @@ class Organisation
     private $name;
 
     /**
-     * @ManyToOne(targetEntity="country")
+     * @ORM\ManyToOne(targetEntity="country")
      *
-     * @JoinColumn(name="country_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     private $country;
 
-    /** @ORM\Column(name="type", type="int", length=1, nullable=false) */
-    private $type;
+    /** @ORM\Column(name="organisationType", type="string", length=30, nullable=false) */
+    private $organisationType;
 
     /**
      * @return int
