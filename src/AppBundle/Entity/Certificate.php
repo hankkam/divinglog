@@ -2,16 +2,17 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\AppBundle;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="certification")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CertificationRepository")
+ * @ORM\Table(name="certificate")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CertificateRepository")
  */
-class Certification
+class Certificate
 {
     /**
      * @ORM\Column(name="id", type="integer", nullable=false)
@@ -21,9 +22,9 @@ class Certification
     private $id;
 
     /**
-     * Many Certifications have One diver.
+     * Many Certificates have One diver.
      *
-     * @ORM\ManyToOne(targetEntity="diver", inversedBy="certifications")
+     * @ORM\ManyToOne(targetEntity="diver", inversedBy="certificate")
      *
      * @ORM\JoinColumn(name="diver_id", referencedColumnName="id")
      */
@@ -32,8 +33,8 @@ class Certification
     /** @ORM\Column(name="certifyingorganization", type="string", length=50, nullable=false) */
     private $certifyingOrganization;
 
-    /** @ORM\Column(name="certification", type="string", length=50, nullable=false) */
-    private $certification;
+    /** @ORM\Column(name="name", type="string", length=50, nullable=false) */
+    private $name;
 
     /** @ORM\Column(name="registrationnumber", type="string", length=50, nullable=false) */
     private $registrationNumber;
@@ -48,7 +49,27 @@ class Certification
     private $instructorRegistrationNumber;
 
     /**
-     * @return mixed
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getDiver()
     {
@@ -56,11 +77,11 @@ class Certification
     }
 
     /**
-     * @param \AppBundle\Entity\Diver $diver
+     * @param string $diver
      *
-     * @return Certification
+     * @return $this
      */
-    public function setDiver(Diver $diver)
+    public function setDiver($diver)
     {
         $this->diver = $diver;
 
@@ -68,7 +89,7 @@ class Certification
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCertifyingOrganization()
     {
@@ -76,9 +97,9 @@ class Certification
     }
 
     /**
-     * @param mixed $certifyingOrganization
+     * @param int $certifyingOrganization
      *
-     * @return Certification
+     * @return $this
      */
     public function setCertifyingOrganization($certifyingOrganization)
     {
@@ -88,27 +109,27 @@ class Certification
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getCertification()
+    public function getName()
     {
-        return $this->certification;
+        return $this->name;
     }
 
     /**
-     * @param mixed $certification
+     * @param string $name
      *
-     * @return Certification
+     * @return $this
      */
-    public function setCertification($certification)
+    public function setName($name)
     {
-        $this->certification = $certification;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getRegistrationNumber()
     {
@@ -116,9 +137,9 @@ class Certification
     }
 
     /**
-     * @param mixed $registrationNumber
+     * @param string $registrationNumber
      *
-     * @return Certification
+     * @return $this
      */
     public function setRegistrationNumber($registrationNumber)
     {
@@ -128,7 +149,7 @@ class Certification
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getDateObtained()
     {
@@ -136,11 +157,11 @@ class Certification
     }
 
     /**
-     * @param mixed $dateObtained
+     * @param \DateTime $dateObtained
      *
-     * @return Certification
+     * @return $this
      */
-    public function setDateObtained($dateObtained)
+    public function setDateObtained(\DateTime $dateObtained)
     {
         $this->dateObtained = $dateObtained;
 
@@ -148,7 +169,7 @@ class Certification
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getInstructorName()
     {
@@ -156,9 +177,9 @@ class Certification
     }
 
     /**
-     * @param mixed $instructorName
+     * @param string $instructorName
      *
-     * @return Certification
+     * @return $this
      */
     public function setInstructorName($instructorName)
     {
@@ -168,7 +189,7 @@ class Certification
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getInstructorRegistrationNumber()
     {
@@ -176,9 +197,9 @@ class Certification
     }
 
     /**
-     * @param mixed $instructorRegistrationNumber
+     * @param string $instructorRegistrationNumber
      *
-     * @return Certification
+     * @return $this
      */
     public function setInstructorRegistrationNumber($instructorRegistrationNumber)
     {
@@ -196,8 +217,7 @@ class Certification
     {
         $metadata
             ->addPropertyConstraints('diver', array(
-                new Assert\NotBlank(array('message' =>  'Required')),
-            ))
-        ;
+                new Assert\NotBlank(array('message' => 'Required')),
+            ));
     }
 }

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Country;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -40,11 +39,8 @@ class Diver
     /** @ORM\Column(name="gender", type="string", nullable=false) */
     private $gender;
 
-    /** @ORM\Column(name="streetname", type="string", length=50, nullable=true) */
-    private $streetName;
-
-    /** @ORM\Column(name="streetnumber", type="string", length=50, nullable=true) */
-    private $streetNumber;
+    /** @ORM\Column(name="street", type="string", length=50, nullable=true) */
+    private $street;
 
     /** @ORM\Column(name="postalcode", type="string", length=50, nullable=true) */
     private $postalCode;
@@ -52,27 +48,24 @@ class Diver
     /** @ORM\Column(name="city", type="string", length=50, nullable=true) */
     private $city;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="country")
-     *
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
-     */
+    /** @ORM\Column(name="country", type="string", length=2, nullable=true) */
     private $country;
 
     /** @ORM\Column(name="phonenumber", type="string", length=50, nullable=true) */
     private $phoneNumber;
 
     /**
-     * One diver has Many certifications.
+     * One diver has Many certificates.
      *
-     * @ORM\OneToMany(targetEntity="certification", mappedBy="diver")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Certificate", mappedBy="diver")
      */
     private $certificates;
 
     /**
      * Constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->certificates = new ArrayCollection();
     }
 
@@ -86,10 +79,14 @@ class Diver
 
     /**
      * @param int $id
+     *
+     * @return $this
      */
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -102,10 +99,14 @@ class Diver
 
     /**
      * @param string $firstName
+     *
+     * @return $this
      */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
     /**
@@ -118,10 +119,14 @@ class Diver
 
     /**
      * @param string $lastName
+     *
+     * @return $this
      */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
     /**
@@ -133,11 +138,15 @@ class Diver
     }
 
     /**
-     * @param string|null $inserts
+     * @param string $inserts
+     *
+     * @return $this
      */
     public function setInserts($inserts)
     {
         $this->inserts = $inserts;
+
+        return $this;
     }
 
     /**
@@ -150,10 +159,14 @@ class Diver
 
     /**
      * @param string $initials
+     *
+     * @return $this
      */
     public function setInitials($initials)
     {
         $this->initials = $initials;
+
+        return $this;
     }
 
     /**
@@ -166,10 +179,14 @@ class Diver
 
     /**
      * @param \DateTime $dateOfBirth
+     *
+     * @return $this
      */
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth(\DateTime $dateOfBirth)
     {
         $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
     }
 
     /**
@@ -182,42 +199,34 @@ class Diver
 
     /**
      * @param string $gender
+     *
+     * @return $this
      */
     public function setGender($gender)
     {
         $this->gender = $gender;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getStreetName()
+    public function getStreet()
     {
-        return $this->streetName;
+        return $this->street;
     }
 
     /**
-     * @param string $streetName
+     * @param string $street
+     *
+     * @return $this
      */
-    public function setStreetName($streetName)
+    public function setStreet($street)
     {
-        $this->streetName = $streetName;
-    }
+        $this->street = $street;
 
-    /**
-     * @return string
-     */
-    public function getStreetNumber()
-    {
-        return $this->streetNumber;
-    }
-
-    /**
-     * @param string $streetNumber
-     */
-    public function setStreetNumber($streetNumber)
-    {
-        $this->streetNumber = $streetNumber;
+        return $this;
     }
 
     /**
@@ -230,10 +239,14 @@ class Diver
 
     /**
      * @param string $postalCode
+     *
+     * @return $this
      */
     public function setPostalCode($postalCode)
     {
         $this->postalCode = $postalCode;
+
+        return $this;
     }
 
     /**
@@ -246,14 +259,18 @@ class Diver
 
     /**
      * @param string $city
+     *
+     * @return $this
      */
     public function setCity($city)
     {
         $this->city = $city;
+
+        return $this;
     }
 
     /**
-     * @return \AppBundle\Entity\Country
+     * @return string
      */
     public function getCountry()
     {
@@ -261,11 +278,11 @@ class Diver
     }
 
     /**
-     * @param \AppBundle\Entity\Country
+     * @param string $country
      *
      * @return $this
      */
-    public function setCountry(Country $country)
+    public function setCountry($country)
     {
         $this->country = $country;
 
@@ -282,10 +299,30 @@ class Diver
 
     /**
      * @param string $phoneNumber
+     *
+     * @return $this
      */
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCertificates()
+    {
+        return $this->certificates;
+    }
+
+    /**
+     * @param string $certificates
+     */
+    public function setCertificates($certificates)
+    {
+        $this->certificates = $certificates;
     }
 
     /**
@@ -297,26 +334,24 @@ class Diver
     {
         $metadata
             ->addPropertyConstraints('initials', array(
-                new Assert\NotBlank(array('message' =>  'Required')),
+                new Assert\NotBlank(array('message' => 'Required')),
             ))
             ->addPropertyConstraints('firstName', array(
-                new Assert\NotBlank(array('message' =>  'Required')),
+                new Assert\NotBlank(array('message' => 'Required')),
                 new Assert\Regex(array(
-                    'pattern'     => '/^[a-z]+$/i',
+                    'pattern' => '/^[a-z]+$/i',
                     'htmlPattern' => '^[a-zA-Z]+$',
                     'message' => 'Invalid characters.'
                 )),
             ))
             ->addPropertyConstraints('lastName', array(
-                new Assert\NotBlank(array('message' =>  'Required')),
+                new Assert\NotBlank(array('message' => 'Required')),
             ))
             ->addPropertyConstraints('dateOfBirth', array(
                 new Assert\Date(array('message' => 'Invalid date')),
             ))
             ->addPropertyConstraints('gender', array(
                 new Assert\NotNull(),
-            ))
-        ;
+            ));
     }
 }
-

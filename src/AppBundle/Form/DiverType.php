@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 /**
  * Diver type.
@@ -33,11 +34,10 @@ class DiverType extends AbstractType
                 'required' => false,
             ))
             ->add('dateOfBirth', BirthdayType::class, array('required' => false, 'years' => range(date('Y'), date('Y') - 120)))
-            ->add('streetName', TextType::class, array('required' => false))
-            ->add('streetNumber', TextType::class, array('required' => false))
+            ->add('street', TextType::class, array('required' => false))
             ->add('postalCode', TextType::class, array('required' => false))
             ->add('city', TextType::class, array('required' => false))
-            ->add('country', TextType::class, array('required' => false))
+            ->add('country', CountryType::class)
         ;
     }
 }
