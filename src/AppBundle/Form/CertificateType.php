@@ -24,11 +24,11 @@ class CertificateType extends AbstractType
             ->add('certifyingOrganization', EntityType::class, array(
                 'required' => false,
                 'class' => 'AppBundle\Entity\Organisation',
-                'choice_label' => 'name',
+                'choice_label' => 'uniqueName',
             ))
             ->add('name', TextType::class, array('required' => false))
             ->add('registrationNumber', TextType::class, array('required' => false))
-            ->add('dateObtained', DateType::class, array('required' => false))
+            ->add('dateObtained', DateType::class, array('required' => false, 'years' => range(date('Y'), date('Y') - 120)))
             ->add('instructorName', TextType::class, array('required' => false))
             ->add('instructorRegistrationNumber', TextType::class, array('required' => false))
         ;

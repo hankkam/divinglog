@@ -109,6 +109,14 @@ class Organisation
     }
 
     /**
+     * @return string
+     */
+    public function getUniqueName()
+    {
+        return sprintf('%s - %s', $this->abbreviation, $this->name);
+    }
+
+    /**
      * Load validator metadata.
      *
      * @param \Symfony\Component\Validator\Mapping\ClassMetadata $metadata
