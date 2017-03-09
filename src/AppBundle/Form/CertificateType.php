@@ -28,7 +28,7 @@ class CertificateType extends AbstractType
             ))
             ->add('name', TextType::class, array('required' => false))
             ->add('registrationNumber', TextType::class, array('required' => false))
-            ->add('dateObtained', DateType::class, array('required' => false, 'years' => range(date('Y'), date('Y') - 120)))
+            ->add('dateObtained', DateType::class, array('required' => false, 'years' => range(date('Y'), date('Y') - 70)))
             ->add('instructorName', TextType::class, array('required' => false))
             ->add('instructorRegistrationNumber', TextType::class, array('required' => false))
         ;

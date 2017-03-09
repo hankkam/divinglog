@@ -35,7 +35,7 @@ class DiverType extends AbstractType
                 'expanded' => true,
                 'required' => false,
             ))
-            ->add('dateOfBirth', BirthdayType::class, array('required' => false, 'years' => range(date('Y'), date('Y') - 120)))
+            ->add('dateOfBirth', BirthdayType::class, array('required' => false, 'years' => range(date('Y'), date('Y') - 95)))
             ->add('street', TextType::class, array('label' => 'Street & number', 'required' => false))
             ->add('postalCode', TextType::class, array('required' => false))
             ->add('city', TextType::class, array('required' => false))
