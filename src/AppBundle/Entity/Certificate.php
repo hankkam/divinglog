@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 /**
  * @ORM\Entity
  * @ORM\Table(name="certificate")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CertificateRepository")
  */
 class Certificate
 {
@@ -24,13 +23,17 @@ class Certificate
     /**
      * Many Certificates have One diver.
      *
-     * @ORM\ManyToOne(targetEntity="diver", inversedBy="certificate")
+     * @ORM\ManyToOne(targetEntity="diver", inversedBy="certificates")
      *
      * @ORM\JoinColumn(name="diver_id", referencedColumnName="id")
      */
     private $diver;
 
-    /** @ORM\Column(name="certifyingorganization", type="string", length=50, nullable=false) */
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organisation")
+     *
+     * @ORM\JoinColumn(name="certifyingorganization_id", referencedColumnName="id")
+     */
     private $certifyingOrganization;
 
     /** @ORM\Column(name="name", type="string", length=50, nullable=false) */
@@ -89,7 +92,7 @@ class Certificate
     }
 
     /**
-     * @return string
+     * @return \AppBundle\Entity\Organisation
      */
     public function getCertifyingOrganization()
     {
@@ -97,7 +100,7 @@ class Certificate
     }
 
     /**
-     * @param int $certifyingOrganization
+     * @param \AppBundle\Entity\Organisation $certifyingOrganization
      *
      * @return $this
      */

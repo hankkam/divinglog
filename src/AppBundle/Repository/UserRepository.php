@@ -25,14 +25,4 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
             ->getOneOrNullResult();
     }
-
-//    /**
-//     * @param \AppBundle\Entity\User $user
-//     */
-//    public function save(User $user)
-//    {
-//        $em = $this->getEntityManager();
-//        $em->persist($user);
-//        $em->flush();
-//    }
 }

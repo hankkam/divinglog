@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Country;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -10,7 +9,6 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 /**
  * @ORM\Entity
  * @ORM\Table(name="organisation")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\OrganisationRepository")
  */
 class Organisation
 {
@@ -21,21 +19,14 @@ class Organisation
      */
     private $id;
 
+    /** @ORM\Column(name="country", type="string", length=2, nullable=true) */
+    private $country;
+
     /** @ORM\Column(name="abbreviation", type="string", length=30, nullable=false) */
     private $abbreviation;
 
     /** @ORM\Column(name="name", type="string", length=255, nullable=false) */
     private $name;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="country")
-     *
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
-     */
-    private $country;
-
-    /** @ORM\Column(name="organisationtype", type="string", length=30, nullable=false) */
-    private $organisationType;
 
     /**
      * @return int
@@ -53,6 +44,26 @@ class Organisation
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string
+     *
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
 
         return $this;
     }
@@ -93,46 +104,6 @@ class Organisation
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return \AppBundle\Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param \AppBundle\Entity\Country
-     *
-     * @return $this
-     */
-    public function setCountry(Country $country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrganisationType()
-    {
-        return $this->organisationType;
-    }
-
-    /**
-     * @param int $organisationType
-     *
-     * @return $this
-     */
-    public function setOrganisationType($organisationType)
-    {
-        $this->organisationType = $organisationType;
 
         return $this;
     }

@@ -114,8 +114,7 @@ class DiverController
      * @param \AppBundle\Entity\Diver $diver
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|
-     *         \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Diver $diver, Request $request)
     {
