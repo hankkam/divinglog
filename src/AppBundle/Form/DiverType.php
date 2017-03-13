@@ -42,6 +42,10 @@ class DiverType extends AbstractType
             ->add('country', CountryType::class)
             ->add('certificates', CollectionType::class, array(
                 'entry_type' => CertificateType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'by_reference' => false,
             ))
         ;
     }

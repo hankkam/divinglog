@@ -57,7 +57,7 @@ class Diver
     /**
      * One diver has Many certificates.
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Certificate", mappedBy="diver")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Certificate", mappedBy="diver", cascade={"persist", "remove"})
      */
     private $certificates;
 
