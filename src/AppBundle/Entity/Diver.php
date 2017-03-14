@@ -317,12 +317,16 @@ class Diver
         return $this->certificates;
     }
 
-    /**
-     * @param string $certificates
-     */
-    public function setCertificates($certificates)
+    public function addCertificate(Certificate $certificate)
     {
-        $this->certificates = $certificates;
+        $certificate->setDiver($this);
+
+        $this->certificates->add($certificate);
+    }
+
+    public function removeCertificate(Certificate $certificate)
+    {
+        $this->certificates->removeElement($certificate);
     }
 
     /**
@@ -352,6 +356,9 @@ class Diver
             ))
             ->addPropertyConstraints('gender', array(
                 new Assert\NotNull(),
+            ))
+            ->addPropertyConstraints('certificates', array(
+                new Assert\Valid(),
             ));
     }
 }

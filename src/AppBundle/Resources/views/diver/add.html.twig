@@ -108,9 +108,6 @@
                     </div>
                     <div id="certification" class="panel-body collapse in">
                         <div class="row">
-                            <div id="education_fields">
-
-                            </div>
                             <div class="col-sm-2 nopadding">
                                 <div class="form-group">
                                     <label>Organisation</label>
@@ -143,9 +140,15 @@
                                 </div>
                             </div>
                         </div>
+
                         {% for certificateField in form.certificates %}
                             {{ macros.certificateCollection(certificateField) }}
                         {%  endfor %}
+
+                        <div id="education_fields">
+                        </div>
+
+                        <div id="certificatePrototype" data-prototype="{{ macros.certificateCollection(form.certificates.vars.prototype)|e }}"></div>
                     </div>
                 </div>
             </div>

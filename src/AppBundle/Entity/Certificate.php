@@ -25,7 +25,7 @@ class Certificate
      *
      * @ORM\ManyToOne(targetEntity="diver", inversedBy="certificates")
      *
-     * @ORM\JoinColumn(name="diver_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="diver_id", referencedColumnName="id", nullable=false)
      */
     private $diver;
 
@@ -164,7 +164,7 @@ class Certificate
      *
      * @return $this
      */
-    public function setDateObtained(\DateTime $dateObtained)
+    public function setDateObtained(\DateTime $dateObtained = null)
     {
         $this->dateObtained = $dateObtained;
 
@@ -219,7 +219,7 @@ class Certificate
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata
-            ->addPropertyConstraints('diver', array(
+            ->addPropertyConstraints('registrationNumber', array(
                 new Assert\NotBlank(array('message' => 'Required')),
             ));
     }

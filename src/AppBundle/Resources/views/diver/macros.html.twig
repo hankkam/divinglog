@@ -1,46 +1,29 @@
 {% macro certificateCollection(certificateField) %}
 <div class="row">
-    <div id="education_fields">
-
+    <div class="col-sm-2 nopadding">
+        {{ form_row(certificateField.certifyingOrganization, {label:false}) }}
     </div>
     <div class="col-sm-2 nopadding">
-        <div class="form-group">
-            {{ form_widget(certificateField.certifyingOrganization) }}
-        </div>
+        {{ form_row(certificateField.name, {label:false}) }}
     </div>
     <div class="col-sm-2 nopadding">
-        <div class="form-group">
-            {{ form_widget(certificateField.name) }}
-        </div>
+        {{ form_row(certificateField.dateObtained, {label:false}) }}
     </div>
     <div class="col-sm-2 nopadding">
-        <div class="form-group">
-            {{ form_widget(certificateField.dateObtained) }}
-        </div>
+        {{ form_row(certificateField.registrationNumber, {label:false}) }}
     </div>
     <div class="col-sm-2 nopadding">
-        <div class="form-group">
-            {{ form_widget(certificateField.registrationNumber) }}
-        </div>
+        {{ form_row(certificateField.instructorName, {label:false}) }}
     </div>
     <div class="col-sm-2 nopadding">
-        <div class="form-group">
-            {{ form_widget(certificateField.instructorName) }}
-        </div>
-    </div>
-
-    <div class="col-sm-2 nopadding">
-        <div class="form-group">
-            <div class="input-group">
-                {{ form_widget(certificateField.instructorRegistrationNumber) }}
-                {#{% if var is defined %}#}
-                    <div class="input-group-btn">
-                        <button class="btn btn-success" onclick="education_fields();" type="button" id="btn_remove"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>
-                    </div>
-                {#{% endif %}#}
+        <div class="input-group">
+            {{ form_row(certificateField.instructorRegistrationNumber, {label:false}) }}
+            <div class="input-group-btn">
+                <button class="btn btn-danger btn-remove" type="button" > <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>
             </div>
         </div>
     </div>
 </div>
 {%  endmacro certificateCollection %}
+
 <div class="clear"></div>
