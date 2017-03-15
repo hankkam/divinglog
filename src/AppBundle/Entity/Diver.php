@@ -15,47 +15,95 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 class Diver
 {
     /**
+     * @var int;
+     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
-    /** @ORM\Column(name="firstname", type="string", length=80, nullable=false) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=80, nullable=false)
+     */
     private $firstName;
 
-    /** @ORM\Column(name="lastname", type="string", length=80, nullable=false) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string", length=80, nullable=false)
+     */
     private $lastName;
 
-    /** @ORM\Column(name="inserts", type="string", length=80, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="inserts", type="string", length=80, nullable=true)
+     */
     private $inserts;
 
-    /** @ORM\Column(name="initials", type="string", length=80, nullable=false) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="initials", type="string", length=80, nullable=false)
+     */
     private $initials;
 
-    /** @ORM\Column(name="dateofbirth", type="datetime", nullable=false) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dateofbirth", type="datetime", nullable=false)
+     */
     private $dateOfBirth;
 
-    /** @ORM\Column(name="gender", type="string", nullable=false) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gender", type="string", nullable=false)
+     */
     private $gender;
 
-    /** @ORM\Column(name="street", type="string", length=50, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="street", type="string", length=50, nullable=true)
+     */
     private $street;
 
-    /** @ORM\Column(name="postalcode", type="string", length=50, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postalcode", type="string", length=50, nullable=true)
+     */
     private $postalCode;
 
-    /** @ORM\Column(name="city", type="string", length=50, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=50, nullable=true)
+     */
     private $city;
 
-    /** @ORM\Column(name="country", type="string", length=2, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=2, nullable=true)
+     */
     private $country;
 
-    /** @ORM\Column(name="phonenumber", type="string", length=50, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phonenumber", type="string", length=50, nullable=true)
+     */
     private $phoneNumber;
 
     /**
      * One diver has Many certificates.
+     *
+     * @var \AppBundle\Entity\Certificate[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Certificate", mappedBy="diver", cascade={"persist", "remove"})
      */
@@ -310,13 +358,16 @@ class Diver
     }
 
     /**
-     * @return string
+     * @return \AppBundle\Entity\Certificate[]
      */
     public function getCertificates()
     {
         return $this->certificates;
     }
 
+    /**
+     * @param \AppBundle\Entity\Certificate $certificate
+     */
     public function addCertificate(Certificate $certificate)
     {
         $certificate->setDiver($this);
@@ -324,6 +375,9 @@ class Diver
         $this->certificates->add($certificate);
     }
 
+    /**
+     * @param \AppBundle\Entity\Certificate $certificate
+     */
     public function removeCertificate(Certificate $certificate)
     {
         $this->certificates->removeElement($certificate);

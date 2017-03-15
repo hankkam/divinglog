@@ -1,4 +1,9 @@
 services:
+    app.certificate_repository:
+        class: AppBundle\Repository\CertificateRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: ["AppBundle:Certificate"]
+
     app.diver_repository:
         class: AppBundle\Repository\DiverRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]

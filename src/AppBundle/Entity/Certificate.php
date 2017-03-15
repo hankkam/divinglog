@@ -2,18 +2,19 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\AppBundle;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CertificateRepository")
  * @ORM\Table(name="certificate")
  */
 class Certificate
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -23,32 +24,54 @@ class Certificate
     /**
      * Many Certificates have One diver.
      *
-     * @ORM\ManyToOne(targetEntity="diver", inversedBy="certificates")
+     * @var \AppBundle\Entity\Diver
      *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Diver", inversedBy="certificates")
      * @ORM\JoinColumn(name="diver_id", referencedColumnName="id", nullable=false)
      */
     private $diver;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organisation")
+     * @var \AppBundle\Entity\Organisation
      *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organisation")
      * @ORM\JoinColumn(name="certifyingorganization_id", referencedColumnName="id")
      */
     private $certifyingOrganization;
 
-    /** @ORM\Column(name="name", type="string", length=50, nullable=false) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     */
     private $name;
 
-    /** @ORM\Column(name="registrationnumber", type="string", length=50, nullable=false) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="registrationnumber", type="string", length=50, nullable=false)
+     */
     private $registrationNumber;
 
-    /** @ORM\Column(name="dateobtained", type="datetime", length=50, nullable=false) */
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateobtained", type="datetime", length=50, nullable=false)
+     */
     private $dateObtained;
 
-    /** @ORM\Column(name="instructorname", type="string", length=50, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instructorname", type="string", length=50, nullable=true)
+     */
     private $instructorName;
 
-    /** @ORM\Column(name="instructorregistrationnumber", type="string", length=50, nullable=true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instructorregistrationnumber", type="string", length=50, nullable=true)
+     */
     private $instructorRegistrationNumber;
 
     /**
@@ -72,7 +95,7 @@ class Certificate
     }
 
     /**
-     * @return string
+     * @return \AppBundle\Entity\Diver
      */
     public function getDiver()
     {
@@ -80,11 +103,11 @@ class Certificate
     }
 
     /**
-     * @param string $diver
+     * @param \AppBundle\Entity\Diver $diver
      *
      * @return $this
      */
-    public function setDiver($diver)
+    public function setDiver(Diver $diver)
     {
         $this->diver = $diver;
 
@@ -104,7 +127,7 @@ class Certificate
      *
      * @return $this
      */
-    public function setCertifyingOrganization($certifyingOrganization)
+    public function setCertifyingOrganization(Organisation $certifyingOrganization)
     {
         $this->certifyingOrganization = $certifyingOrganization;
 

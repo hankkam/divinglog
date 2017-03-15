@@ -12,11 +12,11 @@ $(document).ready(function() {
     });
 
     $("#btn-add").click(function() {
-        $("#certification").attr('class', 'panel-body collapse in');
-        education_fields();
+        $("#certification").attr('class', 'panel-body collapse in').attr('aria-expanded', 'true').removeAttr('style');
+        education_fields(event);
     });
 
-    $('.btn-remove').click(function(event) {
+    $('.btn-remove').click(function() {
         event.target.closest('.row').remove();
     });
 
@@ -26,11 +26,11 @@ $(document).ready(function() {
         var newWidget = certificatePrototype.attr('data-prototype');
         newWidget = newWidget.replace(/__name__/g);
 
-        $('#education_fields').append($(newWidget).addClass('form-group'));
+        $('#education_fields').append($(newWidget));
 
-        obj = $('#education_fields').next('.btn-remove');
-        console.log(obj);
-
+        $('.btn-remove').click(function() {
+            event.target.closest('.row').remove();
+        });
     }
 
 });

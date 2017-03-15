@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Diver;
 use AppBundle\Form\DiverType;
+use AppBundle\Service\CertificateService;
 use AppBundle\Service\DiverService;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -20,6 +22,9 @@ class DiverController
     /** @var \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface */
     private $templating;
 
+    /** @var \AppBundle\Service\CertificateService */
+    private $certificateService;
+
     /** @var \AppBundle\Service\DiverService */
     private $diverService;
 
@@ -34,6 +39,7 @@ class DiverController
 
     /**
      * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
+     * @param \AppBundle\Service\CertificateService $certificateService
      * @param \AppBundle\Service\DiverService $diverService
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
@@ -41,12 +47,14 @@ class DiverController
      */
     public function __construct(
         EngineInterface $templating,
+        CertificateService $certificateService,
         DiverService $diverService,
         FormFactoryInterface $formFactory,
         Session $session,
         Router $router
     ) {
         $this->templating = $templating;
+        $this->certificateService = $certificateService;
         $this->diverService = $diverService;
         $this->formFactory = $formFactory;
         $this->session = $session;
@@ -118,10 +126,25 @@ class DiverController
      */
     public function editAction(Diver $diver, Request $request)
     {
+        $originalCertificates = new ArrayCollection();
+
+        // Create an ArrayCollection of the current certificate objects in the database
+        foreach ($diver->getCertificates() as $certificate) {
+            $originalCertificates->add($certificate);
+        }
+
         $form = $this->formFactory->create(DiverType::class, $diver);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            foreach ($originalCertificates as $certificate) {
+                if (false === $diver->getCertificates()->contains($certificate)) {
+                    $this->certificateService->remove($certificate);
+                    $this->session->getFlashBag()->add('notice', 'Certificate has been removed successfully');
+                }
+            }
+
             $this->diverService->save($diver);
             $this->session->getFlashBag()->add('notice', 'Diver has been modified successfully');
 

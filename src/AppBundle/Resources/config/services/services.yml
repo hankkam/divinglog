@@ -3,3 +3,8 @@ services:
         class: AppBundle\Service\DiverService
         arguments:
             - "@app.diver_repository"
+
+    app.certificate_service:
+        class: AppBundle\Service\CertificateService
+        arguments:
+            - "@app.certificate_repository"
