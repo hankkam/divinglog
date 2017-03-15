@@ -47,6 +47,13 @@ class DiverType extends AbstractType
                 'prototype' => true,
                 'by_reference' => false,
             ))
+            ->add('specialties', CollectionType::class, array(
+                'entry_type' => SpecialtyType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'by_reference' => false,
+            ))
         ;
     }
 

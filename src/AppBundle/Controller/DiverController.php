@@ -6,6 +6,7 @@ use AppBundle\Entity\Diver;
 use AppBundle\Form\DiverType;
 use AppBundle\Service\CertificateService;
 use AppBundle\Service\DiverService;
+use AppBundle\Service\SpecialtyService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -34,6 +35,9 @@ class DiverController
     /** @var \Symfony\Component\HttpFoundation\Session\Session */
     private $session;
 
+    /** @var \AppBundle\Service\SpecialtyService */
+    private $specialtyService;
+
     /** @var \Symfony\Bundle\FrameworkBundle\Routing\Router */
     private $router;
 
@@ -43,6 +47,7 @@ class DiverController
      * @param \AppBundle\Service\DiverService $diverService
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @param \AppBundle\Service\SpecialtyService $specialtyService
      * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
      */
     public function __construct(
@@ -51,6 +56,7 @@ class DiverController
         DiverService $diverService,
         FormFactoryInterface $formFactory,
         Session $session,
+        SpecialtyService $specialtyService,
         Router $router
     ) {
         $this->templating = $templating;
@@ -126,11 +132,16 @@ class DiverController
      */
     public function editAction(Diver $diver, Request $request)
     {
-        $originalCertificates = new ArrayCollection();
-
         // Create an ArrayCollection of the current certificate objects in the database
+        $originalCertificates = new ArrayCollection();
         foreach ($diver->getCertificates() as $certificate) {
             $originalCertificates->add($certificate);
+        }
+
+        // Create an ArrayCollection of the current specialty objects in the database
+        $originalSpecialties = new ArrayCollection();
+        foreach ($diver->getSpecialties() as $specialty) {
+            $originalSpecialties->add($specialty);
         }
 
         $form = $this->formFactory->create(DiverType::class, $diver);
@@ -144,6 +155,14 @@ class DiverController
                     $this->session->getFlashBag()->add('notice', 'Certificate has been removed successfully');
                 }
             }
+
+            foreach ($originalSpecialties as $specialty) {
+                if (false === $diver->getSpecialties()->contains($specialty)) {
+                    $this->specialtyService->remove($specialty);
+                    $this->session->getFlashBag()->add('notice', 'Specialty has been removed successfully');
+                }
+            }
+
 
             $this->diverService->save($diver);
             $this->session->getFlashBag()->add('notice', 'Diver has been modified successfully');

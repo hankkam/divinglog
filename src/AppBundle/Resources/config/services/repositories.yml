@@ -9,6 +9,11 @@ services:
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: ["AppBundle:Diver"]
 
+    app.specialty_repository:
+        class: AppBundle\Repository\SpecialtyRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: ["AppBundle:Specialty"]
+
     app.user_repository:
         class: AppBundle\Repository\UserRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]

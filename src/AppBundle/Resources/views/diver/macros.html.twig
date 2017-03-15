@@ -25,3 +25,32 @@
     </div>
 </div>
 {%  endmacro certificateCollection %}
+
+{% macro specialtyCollection(specialtyField) %}
+    <div class="row">
+        <div class="col-sm-2 nopadding">
+            {{ form_row(specialtyField.certifyingOrganization, {label:false}) }}
+        </div>
+        <div class="col-sm-2 nopadding">
+            {{ form_row(specialtyField.name, {label:false}) }}
+        </div>
+        <div class="col-sm-2 nopadding">
+            {{ form_row(specialtyField.dateObtained, {label:false}) }}
+        </div>
+        <div class="col-sm-2 nopadding">
+            {{ form_row(specialtyField.registrationNumber, {label:false}) }}
+        </div>
+        <div class="col-sm-2 nopadding">
+            {{ form_row(specialtyField.instructorName, {label:false}) }}
+        </div>
+        <div class="col-sm-2 nopadding">
+            <div class="input-group">
+                {{ form_row(specialtyField.instructorRegistrationNumber, {label:false}) }}
+                <div class="input-group-btn">
+                    <button class="btn btn-danger btn-remove-specialty" type="button" > <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endmacro specialtyCollection %}
+

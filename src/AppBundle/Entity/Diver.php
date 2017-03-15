@@ -52,7 +52,7 @@ class Diver
     private $initials;
 
     /**
-     * @var string
+     * @var \DateTime
      *
      * @ORM\Column(name="dateofbirth", type="datetime", nullable=false)
      */
@@ -110,11 +110,21 @@ class Diver
     private $certificates;
 
     /**
+     * One diver has Many specialties.
+     *
+     * @var \AppBundle\Entity\Specialty[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Specialty", mappedBy="diver", cascade={"persist", "remove"})
+     */
+    private $specialties;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->certificates = new ArrayCollection();
+        $this->specialties = new ArrayCollection();
     }
 
     /**
@@ -384,6 +394,32 @@ class Diver
     }
 
     /**
+     * @return \AppBundle\Entity\Specialty[]
+     */
+    public function getSpecialties()
+    {
+        return $this->specialties;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Specialty $specialty
+     */
+    public function addSpecialty(Specialty $specialty)
+    {
+        $specialty->setDiver($this);
+
+        $this->specialties->add($specialty);
+    }
+
+    /**
+     * @param \AppBundle\Entity\Specialty $specialty
+     */
+    public function removeSpecialty(Specialty $specialty)
+    {
+        $this->specialties->removeElement($specialty);
+    }
+
+    /**
      * Load validator metadata.
      *
      * @param \Symfony\Component\Validator\Mapping\ClassMetadata $metadata
@@ -413,6 +449,10 @@ class Diver
             ))
             ->addPropertyConstraints('certificates', array(
                 new Assert\Valid(),
-            ));
+            ))
+            ->addPropertyConstraints('specialties', array(
+                new Assert\Valid(),
+            ))
+        ;
     }
 }

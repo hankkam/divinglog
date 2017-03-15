@@ -8,3 +8,8 @@ services:
         class: AppBundle\Service\CertificateService
         arguments:
             - "@app.certificate_repository"
+
+    app.specialty_service:
+        class: AppBundle\Service\SpecialtyService
+        arguments:
+            - "@app.specialty_repository"

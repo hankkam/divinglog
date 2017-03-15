@@ -33,4 +33,25 @@ $(document).ready(function() {
         });
     }
 
+    $("#btn-add-specialty").click(function() {
+        $("#specialties").attr('class', 'panel-body collapse in').attr('aria-expanded', 'true').removeAttr('style');
+        specialty_fields(event);
+    });
+
+    $('.btn-remove-specialty').click(function() {
+        event.target.closest('.row').remove();
+    });
+
+    function specialty_fields()
+    {
+        var specialtyPrototype = $('#specialtyPrototype');
+        var newWidget = specialtyPrototype.attr('data-prototype');
+        newWidget = newWidget.replace(/__name__/g);
+
+        $('#specialty_fields').append($(newWidget));
+
+        $('.btn-remove-specialty').click(function() {
+            event.target.closest('.row').remove();
+        });
+    }
 });
