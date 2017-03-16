@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="diver")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DiverRepository")
  */
@@ -119,12 +118,22 @@ class Diver
     private $specialties;
 
     /**
+     * One diver has Many diving gear.
+     *
+     * @var \AppBundle\Entity\Gear[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Gear", mappedBy="diver", cascade={"persist", "remove"})
+     */
+    private $equipment;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->certificates = new ArrayCollection();
         $this->specialties = new ArrayCollection();
+        $this->equipment = new ArrayCollection();
     }
 
     /**
@@ -225,6 +234,21 @@ class Diver
         $this->initials = $initials;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        $fullName = '';
+        $fullName .= $this->getFirstName();
+        if (!empty($this->getInserts())){
+            $fullName .= ' ' . $this->getInserts();
+        }
+        $fullName .= ' ' . $this->getLastName();
+
+        return trim($fullName);
     }
 
     /**
@@ -420,6 +444,32 @@ class Diver
     }
 
     /**
+     * @return \AppBundle\Entity\Gear[]
+     */
+    public function getEquipment()
+    {
+        return $this->equipment;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Gear $gear
+     */
+    public function addEquipment(Gear $gear)
+    {
+        $gear->setDiver($this);
+
+        $this->equipment->add($gear);
+    }
+
+    /**
+     * @param \AppBundle\Entity\Gear $gear
+     */
+    public function removeEquipment(Gear $gear)
+    {
+        $this->equipment->removeElement($gear);
+    }
+
+    /**
      * Load validator metadata.
      *
      * @param \Symfony\Component\Validator\Mapping\ClassMetadata $metadata
@@ -451,6 +501,9 @@ class Diver
                 new Assert\Valid(),
             ))
             ->addPropertyConstraints('specialties', array(
+                new Assert\Valid(),
+            ))
+            ->addPropertyConstraints('equipment', array(
                 new Assert\Valid(),
             ))
         ;

@@ -1,7 +1,7 @@
 services:
     app.diver_controller:
         class: AppBundle\Controller\DiverController
-        arguments: ['@templating', '@app.certificate_service', '@app.diver_service', '@form.factory', '@session', '@app.specialty_service', '@router']
+        arguments: ['@templating', '@app.certificate_service', '@app.diver_service', '@form.factory', '@session', '@app.specialty_service', '@app.equipment_service', '@router']
 
     app.dashboard_controller:
         class: AppBundle\Controller\DashboardController

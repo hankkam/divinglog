@@ -54,3 +54,24 @@
     </div>
 {%  endmacro specialtyCollection %}
 
+{% macro equipmentCollection(equipmentField) %}
+    <div class="row">
+        <div class="col-sm-2 nopadding">
+            {{ form_row(equipmentField.type, {label:false}) }}
+        </div>
+        <div class="col-sm-3 nopadding">
+            {{ form_row(equipmentField.brand, {label:false}) }}
+        </div>
+        <div class="col-sm-3 nopadding">
+            {{ form_row(equipmentField.brandType, {label:false}) }}
+        </div>
+        <div class="col-sm-4 nopadding">
+            <div class="input-group">
+                {{ form_row(equipmentField.description, {label:false}) }}
+                <div class="input-group-btn">
+                    <button class="btn btn-danger btn-remove-equipment" type="button" > <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endmacro equipmentCollection %}

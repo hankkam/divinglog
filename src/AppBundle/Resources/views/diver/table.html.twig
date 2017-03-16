@@ -10,25 +10,19 @@
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Initials</th>
-                        <th>Insert(s)</th>
-                        <th>Last Name</th>
+                        <th>Name</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for diver in divers %}
                         <tr class="odd gradeX">
-                            <td>{{ diver.firstname }}</td>
-                            <td>{{ diver.initials }}</td>
-                            <td>{{ diver.inserts }}</td>
-                            <td>{{ diver.lastname }}</td>
+                            <td>{{ diver.fullname }}</td>
                             <td>
                                 <div class="pull-right">
-                                    {#<a href="{{ path('diver_get', {'id' : diver.id}) }}">#}
-                                        {#<button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-eye"></i></button>#}
-                                    {#</a>#}
+                                    <a href="{{ path('diver_get', {'id' : diver.id}) }}">
+                                        <button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-eye"></i></button>
+                                    </a>
                                     <a href="{{ path('diver_edit', {'id' : diver.id}) }}">
                                     <button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></button>
                                     </a>

@@ -13,3 +13,8 @@ services:
         class: AppBundle\Service\SpecialtyService
         arguments:
             - "@app.specialty_repository"
+
+    app.equipment_service:
+        class: AppBundle\Service\EquipmentService
+        arguments:
+            - "@app.equipment_repository"

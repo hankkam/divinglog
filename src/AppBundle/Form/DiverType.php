@@ -54,6 +54,13 @@ class DiverType extends AbstractType
                 'prototype' => true,
                 'by_reference' => false,
             ))
+            ->add('equipment', CollectionType::class, array(
+                'entry_type' => GearType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'by_reference' => false,
+            ))
         ;
     }
 

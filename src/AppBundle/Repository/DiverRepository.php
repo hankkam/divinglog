@@ -15,7 +15,7 @@ class DiverRepository extends EntityRepository
      */
     public function save(Diver $diver)
     {
-        $em = $this->getEntityManager();
+        $em = $this->getEntityManager();;
         $em->persist($diver);
         $em->flush();
     }

@@ -16,7 +16,26 @@ $(document).ready(function() {
         education_fields(event);
     });
 
+    $("#btn-add-specialty").click(function() {
+        $("#specialties").attr('class', 'panel-body collapse in').attr('aria-expanded', 'true').removeAttr('style');
+        specialty_fields(event);
+    });
+
+    $("#btn-add-equipment").click(function() {
+        $("#equipment").attr('class', 'panel-body collapse in').attr('aria-expanded', 'true').removeAttr('style');
+        equipment_fields(event);
+    });
+
+
     $('.btn-remove').click(function() {
+        event.target.closest('.row').remove();
+    });
+
+    $('.btn-remove-specialty').click(function() {
+        event.target.closest('.row').remove();
+    });
+
+    $('.btn-remove-equipment').click(function() {
         event.target.closest('.row').remove();
     });
 
@@ -33,15 +52,6 @@ $(document).ready(function() {
         });
     }
 
-    $("#btn-add-specialty").click(function() {
-        $("#specialties").attr('class', 'panel-body collapse in').attr('aria-expanded', 'true').removeAttr('style');
-        specialty_fields(event);
-    });
-
-    $('.btn-remove-specialty').click(function() {
-        event.target.closest('.row').remove();
-    });
-
     function specialty_fields()
     {
         var specialtyPrototype = $('#specialtyPrototype');
@@ -51,6 +61,19 @@ $(document).ready(function() {
         $('#specialty_fields').append($(newWidget));
 
         $('.btn-remove-specialty').click(function() {
+            event.target.closest('.row').remove();
+        });
+    }
+
+    function equipment_fields()
+    {
+        var equipmentPrototype = $('#equipmentPrototype');
+        var newWidget = equipmentPrototype.attr('data-prototype');
+        newWidget = newWidget.replace(/__name__/g);
+
+        $('#equipment_fields').append($(newWidget));
+
+        $('.btn-remove-equipment').click(function() {
             event.target.closest('.row').remove();
         });
     }

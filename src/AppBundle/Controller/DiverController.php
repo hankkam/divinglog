@@ -6,6 +6,7 @@ use AppBundle\Entity\Diver;
 use AppBundle\Form\DiverType;
 use AppBundle\Service\CertificateService;
 use AppBundle\Service\DiverService;
+use AppBundle\Service\EquipmentService;
 use AppBundle\Service\SpecialtyService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -38,6 +39,9 @@ class DiverController
     /** @var \AppBundle\Service\SpecialtyService */
     private $specialtyService;
 
+    /** @var \AppBundle\Service\EquipmentService */
+    private $equipmentService;
+
     /** @var \Symfony\Bundle\FrameworkBundle\Routing\Router */
     private $router;
 
@@ -48,6 +52,7 @@ class DiverController
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      * @param \AppBundle\Service\SpecialtyService $specialtyService
+     * @param \AppBundle\Service\EquipmentService $equipmentService
      * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
      */
     public function __construct(
@@ -57,6 +62,7 @@ class DiverController
         FormFactoryInterface $formFactory,
         Session $session,
         SpecialtyService $specialtyService,
+        EquipmentService $equipmentService,
         Router $router
     ) {
         $this->templating = $templating;
@@ -64,6 +70,8 @@ class DiverController
         $this->diverService = $diverService;
         $this->formFactory = $formFactory;
         $this->session = $session;
+        $this->specialtyService = $specialtyService;
+        $this->equipmentService = $equipmentService;
         $this->router = $router;
     }
 
@@ -144,6 +152,12 @@ class DiverController
             $originalSpecialties->add($specialty);
         }
 
+        // Create an ArrayCollection of the current diving gear objects in the database
+        $originalEquipment = new ArrayCollection();
+        foreach ($diver->getEquipment() as $gear) {
+            $originalEquipment->add($gear);
+        }
+
         $form = $this->formFactory->create(DiverType::class, $diver);
         $form->handleRequest($request);
 
@@ -163,6 +177,12 @@ class DiverController
                 }
             }
 
+            foreach ($originalEquipment as $gear) {
+                if (false === $diver->getEquipment()->contains($gear)) {
+                    $this->equipmentService->remove($gear);
+                    $this->session->getFlashBag()->add('notice', 'Diving gear has been removed successfully');
+                }
+            }
 
             $this->diverService->save($diver);
             $this->session->getFlashBag()->add('notice', 'Diver has been modified successfully');
@@ -170,7 +190,8 @@ class DiverController
             return new RedirectResponse($this->router->generate('diver'));
         }
 
-        $data =  array('form' => $form->createView());
+        $data =  array('form' => $form->createView(), 'fullname' => $diver->getFullName());
+
 
         return $this->templating->renderResponse("AppBundle:diver:add.html.twig", $data);
     }

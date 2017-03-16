@@ -14,6 +14,11 @@ services:
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: ["AppBundle:Specialty"]
 
+    app.equipment_repository:
+        class: AppBundle\Repository\DivingGearRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: ["AppBundle:Gear"]
+
     app.user_repository:
         class: AppBundle\Repository\UserRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
