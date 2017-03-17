@@ -26,8 +26,8 @@ class GearType extends AbstractType
                 'choice_label' => 'name',
             ))
             ->add('brand', TextType::class, array('required' => true))
-            ->add('brandType', TextType::class, array('required' => true))
-            ->add('description', TextType::class, array('required' => true))
+            ->add('brandType', TextType::class, array('required' => false))
+            ->add('description', TextType::class, array('required' => false))
         ;
     }
 

@@ -11,7 +11,7 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Actions</th>
+                        <th width="54px">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -20,11 +20,8 @@
                             <td>{{ diver.fullname }}</td>
                             <td>
                                 <div class="pull-right">
-                                    <a href="{{ path('diver_get', {'id' : diver.id}) }}">
-                                        <button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-eye"></i></button>
-                                    </a>
                                     <a href="{{ path('diver_edit', {'id' : diver.id}) }}">
-                                    <button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></button>
                                     </a>
                                 </div>
                             </td>

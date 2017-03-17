@@ -49,14 +49,14 @@ class Gear
     /**
      * @var string
      *
-     * @ORM\Column(name="brandtype", type="string", length=50, nullable=false)
+     * @ORM\Column(name="brandtype", type="string", length=50, nullable=true)
      */
     private $brandType;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=50, nullable=false)
+     * @ORM\Column(name="description", type="string", length=50, nullable=true)
      */
     private $description;
 

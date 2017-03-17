@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="diverDetails" class="panel-body collapse in">
+                <div id="diverDetails" class="panel-body collapse">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
@@ -95,7 +95,7 @@
                     Certifications
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-xs" id="btn-add">
+                            <button type="button" class="btn btn-primary btn-xs btn-add" data-target="#certification">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="certification" class="panel-body collapse in">
+                <div id="certification" class="panel-body collapse">
                     <div class="row">
                         <div class="col-sm-2 nopadding">
                             <div class="form-group">
@@ -145,10 +145,10 @@
                         {{ macros.certificateCollection(certificateField) }}
                     {%  endfor %}
 
-                    <div id="education_fields">
+                    <div id="certification_fields">
                     </div>
 
-                    <div id="certificatePrototype" data-prototype="{{ macros.certificateCollection(form.certificates.vars.prototype)|e }}"></div>
+                    <div id="certification_prototype" data-prototype="{{ macros.certificateCollection(form.certificates.vars.prototype)|e }}" data-index="{{ form.certificates|length }}"></div>
                 </div>
             </div>
         </div>
@@ -163,7 +163,7 @@
                     Specialties
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-xs" id="btn-add-specialty">
+                            <button type="button" class="btn btn-primary btn-xs btn-add" data-target="#specialties">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </div>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="specialties" class="panel-body collapse in">
+                <div id="specialties" class="panel-body collapse">
                     <div class="row">
                         <div class="col-sm-2 nopadding">
                             <div class="form-group">
@@ -213,10 +213,10 @@
                         {{ macros.specialtyCollection(specialtyField) }}
                     {%  endfor %}
 
-                    <div id="specialty_fields">
+                    <div id="specialties_fields">
                     </div>
 
-                    <div id="specialtyPrototype" data-prototype="{{ macros.specialtyCollection(form.specialties.vars.prototype)|e }}"></div>
+                    <div id="specialties_prototype" data-prototype="{{ macros.specialtyCollection(form.specialties.vars.prototype)|e }}"></div>
                 </div>
             </div>
         </div>
@@ -230,7 +230,7 @@
                     Diving equipment
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-xs" id="btn-add-equipment">
+                            <button type="button" class="btn btn-primary btn-xs btn-add" data-target="#equipment">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </div>
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="equipment" class="panel-body collapse in">
+                <div id="equipment" class="panel-body collapse">
                     <div class="row">
                         <div class="col-sm-2 nopadding">
                             <div class="form-group">
@@ -272,7 +272,7 @@
                     <div id="equipment_fields">
                     </div>
 
-                    <div id="equipmentPrototype" data-prototype="{{ macros.equipmentCollection(form.equipment.vars.prototype)|e }}"></div>
+                    <div id="equipment_prototype" data-prototype="{{ macros.equipmentCollection(form.equipment.vars.prototype)|e }}"></div>
                 </div>
             </div>
         </div>

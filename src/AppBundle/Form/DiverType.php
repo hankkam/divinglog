@@ -46,6 +46,7 @@ class DiverType extends AbstractType
                 'allow_delete' => true,
                 'prototype' => true,
                 'by_reference' => false,
+                'label' => false,
             ))
             ->add('specialties', CollectionType::class, array(
                 'entry_type' => SpecialtyType::class,
@@ -53,6 +54,7 @@ class DiverType extends AbstractType
                 'allow_delete' => true,
                 'prototype' => true,
                 'by_reference' => false,
+                'label' => false,
             ))
             ->add('equipment', CollectionType::class, array(
                 'entry_type' => GearType::class,
@@ -60,6 +62,7 @@ class DiverType extends AbstractType
                 'allow_delete' => true,
                 'prototype' => true,
                 'by_reference' => false,
+                'label' => false,
             ))
         ;
     }

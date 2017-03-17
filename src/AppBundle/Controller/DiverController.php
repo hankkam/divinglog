@@ -127,7 +127,8 @@ class DiverController
 
             return new RedirectResponse($this->router->generate('diver'));
         }
-        $data =  array('form' => $form->createView());
+
+        $data =  array('form' => $form->createView(), 'fullname' => '');
 
         return $this->templating->renderResponse("AppBundle:diver:add.html.twig", $data);
     }
