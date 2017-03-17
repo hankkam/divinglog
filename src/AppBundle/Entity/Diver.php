@@ -127,6 +127,15 @@ class Diver
     private $equipment;
 
     /**
+     * One diver has Many dive logs.
+     *
+     * @var \AppBundle\Entity\DiveLog[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\DiveLog", mappedBy="diver", cascade={"persist", "remove"})
+     */
+    private $diveLogs;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -134,6 +143,7 @@ class Diver
         $this->certificates = new ArrayCollection();
         $this->specialties = new ArrayCollection();
         $this->equipment = new ArrayCollection();
+        $this->diveLogs =  new ArrayCollection();
     }
 
     /**
@@ -467,6 +477,32 @@ class Diver
     public function removeEquipment(Gear $gear)
     {
         $this->equipment->removeElement($gear);
+    }
+
+    /**
+     * @return \AppBundle\Entity\DiveLog[]
+     */
+    public function getDiveLogs()
+    {
+        return $this->diveLogs;
+    }
+
+    /**
+     * @param \AppBundle\Entity\DiveLog $diveLog
+     */
+    public function addDiveLog(DiveLog $diveLog)
+    {
+        $diveLog->setDiver($this);
+
+        $this->diveLogs->add($diveLog);
+    }
+
+    /**
+     * @param \AppBundle\Entity\DiveLog $diveLog
+     */
+    public function removeDiveLog(DiveLog $diveLog)
+    {
+        $this->diveLogs->removeElement($diveLog);
     }
 
     /**

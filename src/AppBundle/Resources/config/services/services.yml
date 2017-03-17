@@ -18,3 +18,8 @@ services:
         class: AppBundle\Service\EquipmentService
         arguments:
             - "@app.equipment_repository"
+
+    app.divelog_service:
+        class: AppBundle\Service\DiveLogService
+        arguments:
+            - "@app.divelog_repository"

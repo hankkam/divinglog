@@ -34,3 +34,11 @@ diver_edit:
     methods: [GET, POST]
     requirements:
         id: \d+
+
+diver_log:
+    path:      /diver/{id}/log
+    defaults:  { _controller: app.divelog_controller:allAction }
+    methods: [GET]
+    requirements:
+        id: \d+
+

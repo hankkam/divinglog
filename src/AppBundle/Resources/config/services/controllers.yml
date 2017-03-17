@@ -1,9 +1,14 @@
 services:
+    app.dashboard_controller:
+        class: AppBundle\Controller\DashboardController
+        arguments: ['@templating', '@security.token_storage']
+
     app.diver_controller:
         class: AppBundle\Controller\DiverController
         arguments: ['@templating', '@app.certificate_service', '@app.diver_service', '@form.factory', '@session', '@app.specialty_service', '@app.equipment_service', '@router']
 
-    app.dashboard_controller:
-        class: AppBundle\Controller\DashboardController
-        arguments: ['@templating', '@security.token_storage']
+    app.divelog_controller:
+        class: AppBundle\Controller\DiveLogController
+        arguments: ['@templating', '@form.factory', '@session', '@router', '@app.divelog_service']
+
 

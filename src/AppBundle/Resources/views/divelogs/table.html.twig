@@ -3,7 +3,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Divers
+                Dive log {{ fullname }}
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -15,24 +15,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for diver in divers %}
+                    {% for divelog in divelogs %}
                         <tr class="odd gradeX">
-                            <td>{{ diver.fullname }}</td>
+                            {#<td>{{ divelog.date }}</td>#}
+                            <td>{{ divelog.number }}</td>
+                            <td>{{ divelog.country }}</td>
+                            <td>{{ divelog.location }}</td>
+                            <td>{{ divelog.divesite }}</td>
                             <td>
                                 <div class="btn-group">
                                     <div class="pull-right">
-                                        <a href="{{ path('diver_edit', {'id' : diver.id}) }}">
+                                        <a href="">
                                             <button type="button" class="btn btn-primary btn-xs">
                                                 <span class="glyphicon glyphicon-edit"></span>
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="btn-group">
-                                    <div class="pull-right">
-                                        <a href="{{ path('diver_log', {'id' : diver.id}) }}">
-                                            <button type="button" class="btn btn-primary btn-xs">
-                                                <span class="glyphicon glyphicon-list-alt"></span>
                                             </button>
                                         </a>
                                     </div>
@@ -44,7 +39,7 @@
                 </table>
                 <!-- /.table-responsive -->
                 <div class="well">
-                    <a href="{{ path('diver_add') }}" data-toggle="modal" class="btn btn-success">Add new</a>
+                    <a href="" data-toggle="modal" class="btn btn-success">Add new</a>
                 </div>
             </div>
             <!-- /.panel-body -->
