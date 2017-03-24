@@ -10,14 +10,18 @@
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Number</th>
+                        <th>Country</th>
+                        <th>Location</th>
+                        <th>Dive site</th>
                         <th width="64px">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for divelog in divelogs %}
                         <tr class="odd gradeX">
-                            {#<td>{{ divelog.date }}</td>#}
+                            <td>{{ divelog.date|date('d-m-Y') }}</td>
                             <td>{{ divelog.number }}</td>
                             <td>{{ divelog.country }}</td>
                             <td>{{ divelog.location }}</td>
@@ -25,9 +29,18 @@
                             <td>
                                 <div class="btn-group">
                                     <div class="pull-right">
-                                        <a href="">
+                                        <a href="{{ path('diver_log_edit', {'id' : divelog.id}) }}">
                                             <button type="button" class="btn btn-primary btn-xs">
                                                 <span class="glyphicon glyphicon-edit"></span>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="btn-group">
+                                    <div class="pull-right">
+                                        <a href="">
+                                            <button type="button" class="btn btn-primary btn-xs">
+                                                <span class="glyphicon glyphicon-sunglasses"></span>
                                             </button>
                                         </a>
                                     </div>
