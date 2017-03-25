@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\DiveLog;
 use AppBundle\Repository\DiveLogRepository;
 
 /**
@@ -25,5 +26,13 @@ class DiveLogService
     public function findByDiver($diverId)
     {
         $this->diveLogRepository->findBy(array('diver_id' => $diverId));
+    }
+
+    /**
+     * @param \AppBundle\Entity\DiveLog $diveLog
+     */
+    public function save(DiveLog $diveLog)
+    {
+        $this->diveLogRepository->save($diveLog);
     }
 }

@@ -2,11 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\DiveLog;
 use AppBundle\Entity\Diver;
+use AppBundle\Form\DiveLogType;
 use AppBundle\Service\DiveLogService;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -62,9 +66,47 @@ class DiveLogController
             'divelogs' => $diver->getDiveLogs(),
             'page' => 'AppBundle:divelogs:table.html.twig',
             'fullname' => $diver->getFullName(),
+            'diver_id' => $diver->getId(),
         );
 
         return $this->render($data);
+    }
+
+    /**
+     * @param \AppBundle\Entity\Diver $diver
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function addAction(Diver $diver, Request $request)
+    {
+
+        // Create an ArrayCollection of the current dive logs objects in the database
+        $originalDiveLogs = new ArrayCollection();
+        foreach ($diver->getDiveLogs() as $diveLog) {
+            $originalDiveLogs->add($diveLog);
+        }
+
+        $diveLog = new DiveLog();
+        $diveLog->setDiver($diver);
+        $diveLog->setNumber($originalDiveLogs->count()+1);
+
+
+        $form = $this->formFactory->create(DiveLogType::class, $diveLog);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->diveLogService->save($diveLog);
+
+            $this->session->getFlashBag()->add('notice', 'Dive log has been added successfully');
+
+            return new RedirectResponse($this->router->generate('dive_log_add', array('id' => $diver->getId())));
+        }
+
+        $data =  array('form' => $form->createView(), 'fullname' => $diver->getFullName(), 'diver_id' => $diver->getId());
+
+        return $this->templating->renderResponse("AppBundle:divelogs:add.html.twig", $data);
     }
 
     /**

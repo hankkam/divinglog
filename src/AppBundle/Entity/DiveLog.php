@@ -25,7 +25,7 @@ class DiveLog
      *
      * @var \AppBundle\Entity\Diver
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Diver", inversedBy="divelogs")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Diver", inversedBy="diveLogs")
      * @ORM\JoinColumn(name="diver_id", referencedColumnName="id", nullable=false)
      */
     private $diver;
@@ -68,70 +68,70 @@ class DiveLog
     /**
      * @var int
      *
-     * @ORM\Column(name="airtemperature", type="integer", nullable=false)
+     * @ORM\Column(name="airtemperature", type="integer")
      */
     private $airTemperature;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="watertemperature", type="integer", nullable=false)
+     * @ORM\Column(name="watertemperature", type="integer")
      */
     private $waterTemperature;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="altitude", type="integer", nullable=false)
+     * @ORM\Column(name="altitude", type="integer")
      */
     private $altitude;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="visibility", type="integer", nullable=false)
+     * @ORM\Column(name="visibility", type="integer")
      */
     private $visibility;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="timein", type="datetime", nullable=false)
+     * @ORM\Column(name="timein", type="datetime")
      */
     private $timeIn;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="timeout", type="datetime", nullable=false)
+     * @ORM\Column(name="timeout", type="datetime")
      */
     private $timeOut;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="airpressurestart", type="integer", nullable=false)
+     * @ORM\Column(name="airpressurestart", type="integer")
      */
     private $airPressureStart;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="airpressureend", type="integer", nullable=false)
+     * @ORM\Column(name="airpressureend", type="integer")
      */
     private $airPressureEnd;
 
     /**
      * @var
      *
-     * @ORM\Column(name="tank", type="string", columnDefinition="enum('aluminium', 'steel')", nullable=false)
+     * @ORM\Column(name="tank", type="string", columnDefinition="enum('aluminium', 'steel')")
      */
     private $tank;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tanksize", type="string", columnDefinition="enum('5', '10', '12', '15', 'unknown')", nullable=false)
+     * @ORM\Column(name="tanksize", type="string", columnDefinition="enum('5', '10', '12', '15', 'unknown')")
      */
     private $tankSize;
 

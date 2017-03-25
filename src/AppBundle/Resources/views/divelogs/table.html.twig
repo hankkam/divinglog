@@ -10,15 +10,19 @@
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Dive number</th>
+                        <th>Entry date</th>
+                        <th>Country</th>
+                        <th>Location</th>
+                        <th>Dive site</th>
                         <th width="64px">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for divelog in divelogs %}
                         <tr class="odd gradeX">
-                            {#<td>{{ divelog.date }}</td>#}
                             <td>{{ divelog.number }}</td>
+                            <td>{{ divelog.date|date('d-m-Y') }}</td>
                             <td>{{ divelog.country }}</td>
                             <td>{{ divelog.location }}</td>
                             <td>{{ divelog.divesite }}</td>
@@ -39,7 +43,7 @@
                 </table>
                 <!-- /.table-responsive -->
                 <div class="well">
-                    <a href="" data-toggle="modal" class="btn btn-success">Add new</a>
+                    <a href="{{ path('dive_log_add', {'id' : diver_id}) }}" data-toggle="modal" class="btn btn-success">Add new</a>
                 </div>
             </div>
             <!-- /.panel-body -->

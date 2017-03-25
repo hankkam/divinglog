@@ -11,11 +11,6 @@ diver:
     defaults:  { _controller: app.diver_controller:allAction }
     methods: [GET]
 
-diver_create:
-    path:      /diver/add
-    defaults:  { _controller: app.diver_controller:addAction }
-    methods: [POST]
-
 diver_get:
     path:      /diver/{id}
     defaults:  { _controller: app.diver_controller:getAction }
@@ -35,10 +30,17 @@ diver_edit:
     requirements:
         id: \d+
 
-diver_log:
-    path:      /diver/{id}/log
+dive_log_list:
+    path:      /diver/{id}/listlog
     defaults:  { _controller: app.divelog_controller:allAction }
     methods: [GET]
+    requirements:
+        id: \d+
+
+dive_log_add:
+    path:      /diver/{id}/addlog
+    defaults:  { _controller: app.divelog_controller:addAction }
+    methods: [GET, POST]
     requirements:
         id: \d+
 
