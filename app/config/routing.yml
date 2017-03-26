@@ -43,3 +43,16 @@ dive_log_add:
     methods: [GET, POST]
     requirements:
         id: \d+
+
+diver_log_edit:
+    path:      /diver/{id}/editlog
+    defaults:  { _controller: app.divelog_controller:editAction }
+    methods: [GET, POST]
+    requirements:
+        id: \d+
+        log_id: \d+
+
+diver_log_search_dive_site:
+    path:      /diver/searchdivesite
+    defaults:  { _controller: app.divelog_controller:searchDiveSiteAction }
+    methods: [GET]

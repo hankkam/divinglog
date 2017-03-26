@@ -1,0 +1,5 @@
+
+Open dive site database.
+http://www.divesites.com/
+
+http://api.divesites.com/?mode=sites&lat=47.6031537682643&lng=-122.336164712906&dist=25

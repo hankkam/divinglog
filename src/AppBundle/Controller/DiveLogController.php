@@ -80,7 +80,6 @@ class DiveLogController
      */
     public function addAction(Diver $diver, Request $request)
     {
-
         // Create an ArrayCollection of the current dive logs objects in the database
         $originalDiveLogs = new ArrayCollection();
         foreach ($diver->getDiveLogs() as $diveLog) {
@@ -101,12 +100,55 @@ class DiveLogController
 
             $this->session->getFlashBag()->add('notice', 'Dive log has been added successfully');
 
-            return new RedirectResponse($this->router->generate('dive_log_add', array('id' => $diver->getId())));
+            return new RedirectResponse($this->router->generate('dive_log_list'));
         }
 
         $data =  array('form' => $form->createView(), 'fullname' => $diver->getFullName(), 'diver_id' => $diver->getId());
 
         return $this->templating->renderResponse("AppBundle:divelogs:add.html.twig", $data);
+    }
+
+    /**
+     * @param \AppBundle\Entity\DiveLog $diveLog
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(DiveLog $diveLog, Request $request)
+    {
+        $form = $this->formFactory->create(DiveLogType::class, $diveLog);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->diveLogService->save($diveLog);
+
+            $this->session->getFlashBag()->add('notice', 'Dive log has been updated successfully');
+
+            return new RedirectResponse($this->router->generate('dive_log_list', array('id' => $diveLog->getDiver()->getId())));
+        }
+
+        $data =  array('form' => $form->createView(), 'fullname' => $diveLog->getDiver()->getFullName(), 'diver_id' => $diveLog->getDiver()->getId());
+
+        return $this->templating->renderResponse("AppBundle:divelogs:add.html.twig", $data);
+    }
+
+    /**
+     * Search dive sites from www.diversites.com.
+     */
+    public function searchDiveSiteAction()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://api.divesites.com/?mode=sites&lat=-8.5297981&lng=115.5111155&dist=150');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec($ch);
+
+        $data = json_decode($response);
+        dump($data->sites);
+
+        return $this->templating->renderResponse("AppBundle:divelogs:index.html.twig", $data);
     }
 
     /**
