@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,8 +26,8 @@ class DiveLogType extends AbstractType
         $builder
             ->add('id', HiddenType::class)
             ->add('number', IntegerType::class)
-            ->add('timein', DateType::class)
-            ->add('timeout', DateType::class)
+            ->add('timein', TimeType::class)
+            ->add('timeout', TimeType::class)
             ->add('date', DateType::class)
             ->add('country', CountryType::class)
             ->add('location', TextType::class)
