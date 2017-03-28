@@ -11,4 +11,7 @@ services:
         class: AppBundle\Controller\DiveLogController
         arguments: ['@templating', '@form.factory', '@session', '@router', '@app.divelog_service']
 
+    app.map_location_controller:
+        class: AppBundle\Controller\MapLocationController
+        arguments: ['@templating', '@form.factory', '@session', '@router', '@app.map_location_service']
 

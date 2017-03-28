@@ -13,6 +13,20 @@ $(document).ready(function() {
     $(".btn-add").click(onAddRow);
     $('.btn-remove').click(onRowRemove);
 
+    $('.btn-search-dive-sites').click(function(e) {
+        $.ajax({
+            url: "/map/geolocation",
+            data: {
+                country: $('#dive_log_country').val(),
+                location: $('#dive_log_location').val(),
+                divesite: $('#dive_log_divesite').val()
+            },
+            success: function (result) {
+                $("#diveMap").html("<strong>" + result + "</strong> degrees");
+            }
+        });
+    });
+
     function onRowRemove()
     {
         $(this).closest('.row').remove();

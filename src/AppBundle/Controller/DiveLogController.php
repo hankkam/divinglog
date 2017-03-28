@@ -134,24 +134,6 @@ class DiveLogController
     }
 
     /**
-     * Search dive sites from www.diversites.com.
-     */
-    public function searchDiveSiteAction()
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://api.divesites.com/?mode=sites&lat=-8.5297981&lng=115.5111155&dist=150');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $response = curl_exec($ch);
-
-        $data = json_decode($response);
-        dump($data->sites);
-
-        return $this->templating->renderResponse("AppBundle:divelogs:index.html.twig", $data);
-    }
-
-    /**
      * @param array $data
      *
      * @return \Symfony\Component\HttpFoundation\Response

@@ -52,7 +52,7 @@ diver_log_edit:
         id: \d+
         log_id: \d+
 
-diver_log_search_dive_site:
-    path:      /diver/searchdivesite
-    defaults:  { _controller: app.divelog_controller:searchDiveSiteAction }
+map_location_geo_location:
+    path:      /map/geolocation
+    defaults:  { _controller: app.map_location_controller:getGeoLocation }
     methods: [GET]

@@ -23,3 +23,6 @@ services:
         class: AppBundle\Service\DiveLogService
         arguments:
             - "@app.divelog_repository"
+
+    app.map_location_service:
+        class: AppBundle\Service\MapLocationService

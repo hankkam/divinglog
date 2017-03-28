@@ -3,3 +3,14 @@ Open dive site database.
 http://www.divesites.com/
 
 http://api.divesites.com/?mode=sites&lat=47.6031537682643&lng=-122.336164712906&dist=25
+http://api.divesites.com/?mode=sites&-8.274202&lng115.593037&dist=25
+
+AIzaSyDMPI2wts0Emdfmg1eZ7dknFBzeiD4joO8
+
+
+https://maps.googleapis.com/maps/api/geocode/json?address=Indonesia+Bali,+Tulamben,+ID&key=AIzaSyDMPI2wts0Emdfmg1eZ7dknFBzeiD4joO8
+
+ +"lat": "-8.5297981"
+  +"lng": "115.5111155"
+
+http://api.divesites.com/?mode=sites&-8.5297981&lng=115.5111155&dist=25

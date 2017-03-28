@@ -30,7 +30,7 @@ class DiveLogType extends AbstractType
             ->add('date', DateType::class)
             ->add('country', CountryType::class)
             ->add('location', TextType::class)
-            ->add('divesite', TextType::class)
+            ->add('divesite', TextType::class, array('required' => false, 'label' => false))
         ;
     }
 
