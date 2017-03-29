@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     $('.btn-search-dive-sites').click(function(e) {
         $.ajax({
-            url: "/map/geolocation",
+            url: "/app_dev.php/map/geolocation",
             data: {
                 country: $('#dive_log_country').val(),
                 location: $('#dive_log_location').val(),
@@ -39,7 +39,7 @@ $(document).ready(function() {
                 var i = 1;
                 $.each(result['data'], function(key, value) {
 
-                    html = html + '<tr><td>' + i + '</td>' +
+                    html = html + '<tr class="btn-set-dive-site"><td>' + i + '</td>' +
                         '<td>' + key + '</td>' +
                         '<td>' + value['lat'] + '</td>' +
                         '<td>' + value['lng'] + '</td>' +
@@ -54,13 +54,6 @@ $(document).ready(function() {
             }
         });
     });
-
-    $(".hoverDiv").hover(function(){
-        $(this).css("background", "#f5f5f5");
-    }, function(){
-        $(this).css("background", "#fff");
-    });
-
 });
 
 function onRowRemove()
