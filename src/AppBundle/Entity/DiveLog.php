@@ -143,6 +143,20 @@ class DiveLog
     private $weight;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="lat", type="string")
+     */
+    private $lat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lng", type="string")
+     */
+    private $lng;
+
+    /**
      * @return int
      */
     public function getId()
@@ -494,6 +508,46 @@ class DiveLog
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param string $lat
+     *
+     * @return $this
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * @param string $lng
+     *
+     * @return $this
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
 
         return $this;
     }

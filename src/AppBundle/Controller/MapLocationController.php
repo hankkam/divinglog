@@ -59,9 +59,9 @@ class MapLocationController
         $query = $request->query;
         $country = $query->get('country');
         $location = $query->get('location');
-        $divesite = $query->get('divesite');
+        $range = $query->get('range');
 
-        $geoLocation = $this->mapLocationService->getGeoLocation($country, $location, $divesite);
+        $geoLocation = $this->mapLocationService->getGeoLocation($country, $location, $range);
 
         return $response->setData(array('data' => $geoLocation));
     }

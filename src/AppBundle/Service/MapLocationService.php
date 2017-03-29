@@ -8,26 +8,26 @@ namespace AppBundle\Service;
  */
 class MapLocationService
 {
+    const DEFAULT_RANGE = 25;
     const GOOGLE_API_KEY = 'AIzaSyDMPI2wts0Emdfmg1eZ7dknFBzeiD4joO8';
-
     const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
-
     const DIVING_SITES_API = 'http://api.divesites.com/?mode=sites';
 
     /**
      * @param string $country
      * @param string $location
-     * @param string $diveSite
+     * @param string $range
      *
      * @return array()
      */
-    public function getGeoLocation($country, $location = null, $diveSite = null)
+    public function getGeoLocation($country, $location = null, $range = null)
     {
         $criteria = array();
         if (!is_null($location)) { $criteria[] = $location; }
-        if (!is_null($diveSite)) { $criteria[] = $diveSite; }
         $criteria[] = $country;
+        $range = (is_null($range)) ? static::DEFAULT_RANGE : $range;
 
+        $criteria = str_replace(' ', ',+', $criteria);
         $address = implode(',+' , $criteria);
 
         $url = (static::GOOGLE_API_URL . 'address=' . $address . '&key=' . static::GOOGLE_API_KEY);
@@ -35,10 +35,31 @@ class MapLocationService
         $request = $this->callApi($url);
         $geoLocation = $request->results[0];
 
-        $location = '&lat=' . $geoLocation->geometry->location->lat . '&lng=' . $geoLocation->geometry->location->lng . '&dist=750';
+        $location = '&lat=' . $geoLocation->geometry->location->lat . '&lng=' . $geoLocation->geometry->location->lng . '&dist=' . $range;
+
         $diveSites = $this->callApi(static::DIVING_SITES_API . $location);
 
-        return $diveSites->sites;
+        return $this->sortDiveSites($diveSites->sites);
+    }
+
+    /**
+     * @param array $diveSites
+     *
+     * @return array
+     */
+    private function sortDiveSites($diveSites)
+    {
+        $array = array();
+        foreach ($diveSites as $diveSite) {
+            $array[$diveSite->name] = array(
+                'lat' => $diveSite->lat,
+                'lng' =>$diveSite->lng,
+                'distance' => $diveSite->distance
+            );
+        }
+        ksort($array, 2);
+
+        return $array;
     }
 
     /**

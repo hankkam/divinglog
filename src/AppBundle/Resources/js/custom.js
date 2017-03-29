@@ -19,41 +19,75 @@ $(document).ready(function() {
             data: {
                 country: $('#dive_log_country').val(),
                 location: $('#dive_log_location').val(),
-                divesite: $('#dive_log_divesite').val()
+                range: $('#range').val()
             },
             success: function (result) {
-                $("#diveMap").html("<strong>" + result + "</strong> degrees");
+            var html = '' +
+                '<div class="form-group">' +
+                    '<label>Select the dive site</label>' +
+                    '<div class="table-responsive">' +
+                    '<table class="table table-striped table-bordered table-hover">' +
+                        '<thead>' +
+                            '<tr><th>#</th>' +
+                            '<th>Dive site name</th>' +
+                            '<th>Latitude</th>' +
+                            '<th>Longitude</th>' +
+                            '<th>Distance from selected country and location in Nautical miles (NM)</th>' +
+                            '<th>Kilometers (KM)</th>' +
+                '           </tr></thead><tbody>';
+
+                var i = 1;
+                $.each(result['data'], function(key, value) {
+
+                    html = html + '<tr><td>' + i + '</td>' +
+                        '<td>' + key + '</td>' +
+                        '<td>' + value['lat'] + '</td>' +
+                        '<td>' + value['lng'] + '</td>' +
+                        '<td>' + value['distance'] + '</td>' +
+                        '<td>' + (value['distance'] * 1.85200).toFixed(2) + '</td>' +
+                        '</tr>';
+                    i = i + 1;
+
+                });
+                html = html + '</tbody></table></div></div>';
+                $('#diveSites').html(html);
             }
         });
     });
 
-    function onRowRemove()
-    {
-        $(this).closest('.row').remove();
-    }
-
-    function expandDiv(collection)
-    {
-        $(collection).addClass('in').attr('aria-expanded', 'true').removeAttr('style');
-    }
-
-    function onAddRow()
-    {
-        var collection = $(this).closest('button').data('target');
-        expandDiv(collection);
-
-        var certificatePrototype = $(collection + '_prototype');
-        var newWidget = certificatePrototype.data('prototype');
-
-        var index = certificatePrototype.data('index');
-        newWidget = newWidget.replace(/__name__/g, index);
-
-        certificatePrototype.data('index', index + 1);
-
-        var $newWidget = $(newWidget);
-        $(collection + '_fields').append($newWidget);
-
-        $newWidget.find('.btn-remove').click(onRowRemove);
-    }
+    $(".hoverDiv").hover(function(){
+        $(this).css("background", "#f5f5f5");
+    }, function(){
+        $(this).css("background", "#fff");
+    });
 
 });
+
+function onRowRemove()
+{
+    $(this).closest('.row').remove();
+}
+
+function expandDiv(collection)
+{
+    $(collection).addClass('in').attr('aria-expanded', 'true').removeAttr('style');
+}
+
+function onAddRow()
+{
+    var collection = $(this).closest('button').data('target');
+    expandDiv(collection);
+
+    var certificatePrototype = $(collection + '_prototype');
+    var newWidget = certificatePrototype.data('prototype');
+
+    var index = certificatePrototype.data('index');
+    newWidget = newWidget.replace(/__name__/g, index);
+
+    certificatePrototype.data('index', index + 1);
+
+    var $newWidget = $(newWidget);
+    $(collection + '_fields').append($newWidget);
+
+    $newWidget.find('.btn-remove').click(onRowRemove);
+}
