@@ -1,4 +1,7 @@
+var diveData = null;
+
 $(document).ready(function() {
+
 
     $('#dataTables-example').DataTable({
         responsive: true
@@ -22,8 +25,11 @@ $(document).ready(function() {
                 range: $('#range').val()
             },
             success: function (result) {
+
+                diveData = result['data'];
+
             var html = '' +
-                '<div class="form-group">' +
+                '<div class="form-group select-list">' +
                     '<label>Select the dive site</label>' +
                     '<div class="table-responsive">' +
                     '<table class="table table-striped table-bordered table-hover">' +
@@ -34,13 +40,13 @@ $(document).ready(function() {
                             '<th>Longitude</th>' +
                             '<th>Distance from selected country and location in Nautical miles (NM)</th>' +
                             '<th>Kilometers (KM)</th>' +
-                '           </tr></thead><tbody>';
+                            '</tr></thead><tbody>';
 
                 var i = 1;
                 $.each(result['data'], function(key, value) {
 
-                    html = html + '<tr class="btn-set-dive-site"><td>' + i + '</td>' +
-                        '<td>' + key + '</td>' +
+                    html = html + '<tr onclick="onClickRow(' + key + ')" class="btn-set-dive-site"><td>' + i + '</td>' +
+                        '<td>' + value['name'] + '</td>' +
                         '<td>' + value['lat'] + '</td>' +
                         '<td>' + value['lng'] + '</td>' +
                         '<td>' + value['distance'] + '</td>' +
@@ -53,21 +59,29 @@ $(document).ready(function() {
                 $('#diveSites').html(html);
             }
         });
+
     });
+
+
 });
 
-function onRowRemove()
-{
+function onClickRow(key) {
+
+    var data = diveData[key];
+    $('#dive_log_divesite').val(data['name']);
+    $('#dive_log_lat').val(data['lat']);
+    $('#dive_log_lng').val(data['lng']);
+}
+
+function onRowRemove() {
     $(this).closest('.row').remove();
 }
 
-function expandDiv(collection)
-{
+function expandDiv(collection) {
     $(collection).addClass('in').attr('aria-expanded', 'true').removeAttr('style');
 }
 
-function onAddRow()
-{
+function onAddRow() {
     var collection = $(this).closest('button').data('target');
     expandDiv(collection);
 

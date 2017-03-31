@@ -100,7 +100,7 @@ class DiveLogController
 
             $this->session->getFlashBag()->add('notice', 'Dive log has been added successfully');
 
-            return new RedirectResponse($this->router->generate('dive_log_list'));
+            return new RedirectResponse($this->router->generate('dive_log_list', array('id' => $diver->getId())));
         }
 
         $data =  array('form' => $form->createView(), 'fullname' => $diver->getFullName(), 'diver_id' => $diver->getId());

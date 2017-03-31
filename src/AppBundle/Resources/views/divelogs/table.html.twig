@@ -11,11 +11,12 @@
                     <thead>
                     <tr>
                         <th width="100px">Dive number</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Country</th>
-                        <th>Location</th>
                         <th>Dive site</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Time in</th>
+                        <th>Time out</th>
+                        <th>Country</th>
                         <th width="64px">Actions</th>
                     </tr>
                     </thead>
@@ -23,11 +24,12 @@
                     {% for divelog in divelogs %}
                         <tr class="odd gradeX">
                             <td>{{ divelog.number }}</td>
-                            <td>{{ divelog.timein|date('d-m-Y') }}</td>
-                            <td>{{ divelog.timein|date('H:i:s') }}</td>
-                            <td>{{ divelog.country }}</td>
-                            <td>{{ divelog.location }}</td>
                             <td>{{ divelog.divesite }}</td>
+                            <td>{{ divelog.location }}</td>
+                            <td>{{ divelog.date|date('d-m-Y') }}</td>
+                            <td>{{ divelog.timein|date('H:i') }}</td>
+                            <td>{{ divelog.timeout|date('H:i') }}</td>
+                            <td>{{ divelog.country }}</td>
                             <td>
                                 <div class="btn-group">
                                     <div class="pull-right">

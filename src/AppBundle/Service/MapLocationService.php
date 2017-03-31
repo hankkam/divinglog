@@ -51,7 +51,8 @@ class MapLocationService
     {
         $array = array();
         foreach ($diveSites as $diveSite) {
-            $array[$diveSite->name] = array(
+            $array[] = array(
+                'name' => $diveSite->name,
                 'lat' => $diveSite->lat,
                 'lng' =>$diveSite->lng,
                 'distance' => $diveSite->distance

@@ -26,9 +26,9 @@ class DiveLogType extends AbstractType
         $builder
             ->add('id', HiddenType::class)
             ->add('number', IntegerType::class)
-            ->add('timein', TimeType::class)
-            ->add('timeout', TimeType::class)
-            ->add('date', DateType::class)
+            ->add('timein', TimeType::class, array('data' => new \DateTime('now')))
+            ->add('timeout', TimeType::class, array('data' => new \DateTime('now')))
+            ->add('date', DateType::class, array('data' => new \DateTime('now')))
             ->add('country', CountryType::class)
             ->add('location', TextType::class)
             ->add('divesite', TextType::class, array('required' => false, 'label' => 'Dive site name'))
