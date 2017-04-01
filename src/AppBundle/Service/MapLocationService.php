@@ -10,6 +10,7 @@ class MapLocationService
 {
     const DEFAULT_RANGE = 25;
     const GOOGLE_API_KEY = 'AIzaSyDMPI2wts0Emdfmg1eZ7dknFBzeiD4joO8';
+    const GOOGLE_API_KEY_PLACES = 'AIzaSyCApZJWeE19BtZqZpJ1zjMITg0aJn9oLZw';
     const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
     const DIVING_SITES_API = 'http://api.divesites.com/?mode=sites';
 
@@ -25,7 +26,7 @@ class MapLocationService
         $criteria = array();
         if (!is_null($location)) { $criteria[] = $location; }
         $criteria[] = $country;
-        $range = (is_null($range)) ? static::DEFAULT_RANGE : $range;
+        $range = (empty($range)) ? static::DEFAULT_RANGE : $range;
 
         $criteria = str_replace(' ', ',+', $criteria);
         $address = implode(',+' , $criteria);

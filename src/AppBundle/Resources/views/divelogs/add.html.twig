@@ -72,8 +72,15 @@
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="col-xs-2">
-                                    {{ form_row(form.lng) }}
-                                    <p class="help-block"></p>
+                                    <label>Longitude</label>
+                                    <div class="form-group input-group">
+                                        {{ form_row(form.lng) }}
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default btn-clear-result" type="button">
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,9 +88,11 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <div id="diveSites">
-                                        {#<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1660.050126541086!2d115.59215134519533!3d-8.274222707052582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7c42693d22efc668!2sTumaben+US+Liberty+Wreck+Ship!5e0!3m2!1snl!2snl!4v1490540274257" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>#}
-                                    </div>
+                                    <div id="diveSites"></div>
+                                    <div id="map"></div>
+                                    <script async defer
+                                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT-CLMr_COsA468D__GmKMSX9S7u-UNpE">
+                                    </script>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group input-group">

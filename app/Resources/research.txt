@@ -14,3 +14,5 @@ https://maps.googleapis.com/maps/api/geocode/json?address=Indonesia+Bali,+Tulamb
   +"lng": "115.5111155"
 
 http://api.divesites.com/?mode=sites&-8.5297981&lng=115.5111155&dist=25
+
+https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-12.4626,-69.9668&radius=25&key=AIzaSyA-iypLXCk2FpnjnhwjiwOIvKBNAiXas1M

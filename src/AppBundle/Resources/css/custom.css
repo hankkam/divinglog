@@ -17,3 +17,7 @@
 .form-group .select-list .table-hover tbody tr:hover > td {
     cursor: pointer;
 }
+
+#map {
+    height: 0px;
+}

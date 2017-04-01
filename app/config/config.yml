@@ -120,6 +120,10 @@ assetic:
                 - '@AppBundle/Resources/js/sb-admin-2/sb-admin-2.js'
                 - '@AppBundle/Resources/js/custom.js'
 
+        custom-images:
+            inputs: '@AppBundle/Resources/images/diveflag.png'
+            output: 'images/diveflag.png'
+
         font-awesome-otf:
             inputs: '@AppBundle/Resources/fonts/font-awesome/FontAwesome.otf'
             output: 'fonts/FontAwesome.otf'
