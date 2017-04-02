@@ -157,6 +157,20 @@ class DiveLog
     private $lng;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="environment", type="integer")
+     */
+    private $environment;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="tide", type="integer")
+     */
+    private $tide;
+
+    /**
      * @return int
      */
     public function getId()
@@ -548,6 +562,46 @@ class DiveLog
     public function setLng($lng)
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+
+    /**
+     * @param int $environment
+     *
+     * @return $this
+     */
+    public function setEnvironment($environment)
+    {
+        $this->environment = $environment;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTide()
+    {
+        return $this->tide;
+    }
+
+    /**
+     * @param int $tide
+     *
+     * @return DiveLog
+     */
+    public function setTide($tide)
+    {
+        $this->tide = $tide;
 
         return $this;
     }

@@ -2,6 +2,7 @@ var diveData = null;
 
 $(document).ready(function() {
 
+    $('#map').toggle();
 
     $('#dataTables-example').DataTable({
         responsive: true
@@ -17,6 +18,7 @@ $(document).ready(function() {
     $('.btn-remove').click(onRowRemove);
 
     $('.btn-clear-result').click(clearResult);
+    $('.btn-show-map').click(onClickMap);
 
     $('.btn-search-dive-sites').click(function(e) {
         $.ajax({
@@ -32,7 +34,7 @@ $(document).ready(function() {
 
                     var html = '<div id="nearest_dive_sites">' +
                         '<div class="form-group select-list">' +
-                            '<label>Select the dive site</label>' +
+                            '<label>Select the dive site or fill in the dive site name</label>' +
                             '<div class="table-responsive">' +
                             '<table class="table table-striped table-bordered table-hover">' +
                                 '<thead>' +
@@ -67,10 +69,22 @@ $(document).ready(function() {
 
 });
 
+function onClickMap() {
+
+    $('#map').toggle();
+
+    var data = {};
+    data['lat']  = $('#dive_log_lat').val();
+    data['lng']  = $('#dive_log_lng').val();
+    data['name'] = $('#dive_log_diveSite').val();
+
+    initMap(data);
+}
+
 function onClickRow(key) {
 
     var data = diveData[key];
-    $('#dive_log_divesite').val(data['name']);
+    $('#dive_log_diveSite').val(data['name']);
     $('#dive_log_lat').val(data['lat']);
     $('#dive_log_lng').val(data['lng']);
 
@@ -84,6 +98,7 @@ function onClickRow(key) {
 }
 
 function clearResult() {
+    $('#nearest_dive_sites').remove();
     $('#map').css('height', '0px');
     $('#map').css('width', '0px');
     $('#dive_log_country').val('');
@@ -97,7 +112,6 @@ function clearResult() {
 function initMap(data) {
 
     $('#map').css('height', '400px');
-    //$('#map').css('width', '350px');
 
     var myLatLng = {lat: parseFloat(data['lat']), lng: parseFloat(data['lng'])};
 

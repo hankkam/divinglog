@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Dive log details
+                    Location details
                     <div class="pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#logDetails">
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
-                                    {{ form_row(form.divesite) }}
+                                    {{ form_row(form.diveSite) }}
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="col-xs-2">
@@ -78,6 +78,11 @@
                                         <span class="input-group-btn">
                                             <button class="btn btn-default btn-clear-result" type="button">
                                                 <i class="fa fa-refresh"></i>
+                                            </button>
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default btn-show-map" type="button">
+                                                <i class="fa fa-map"></i>
                                             </button>
                                         </span>
                                     </div>
@@ -109,7 +114,79 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default" >
+                <div class="panel-heading">
+                    Environment conditions
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#weather">
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="weather" class="panel-body collapse">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <div class="col-xs-1">
+                                    {{ form_row(form.airtemperature) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.watertemperature) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.altitude) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.visibility) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.tank) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.tanksize) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.weight) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.airpressurestart) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.airpressureend) }}
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    {#{{ form_row(form.environment) }}#}
+                                </div>
+                                <div class="col-xs-2">
+                                    {#{{ form_row(form.tide) }}#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default" >
@@ -117,7 +194,7 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-lg-9">
-                                <a href="{{ path('dive_log_add', {'id' : diver_id}) }}" class="btn btn-default" >Cancel</a>
+                                <a href="{{ path('dive_log_list', {'id' : diver_id}) }}" class="btn btn-default" >Cancel</a>
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </div>
