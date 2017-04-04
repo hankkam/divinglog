@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Location details
+                    Location Date and Time
                     <div class="pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#logDetails">
@@ -99,10 +99,6 @@
                                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT-CLMr_COsA468D__GmKMSX9S7u-UNpE">
                                     </script>
                                 </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group input-group">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -173,10 +169,10 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-xs-2">
-                                    {#{{ form_row(form.environment) }}#}
+                                    {{ form_row(form.environment) }}
                                 </div>
                                 <div class="col-xs-2">
-                                    {#{{ form_row(form.tide) }}#}
+                                    {{ form_row(form.tide) }}
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Form\DataTransformer\BinaryValueToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,6 +20,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class DiveLogType extends AbstractType
 {
+    /** @var array  */
+    private $choices = array(
+        'choices' => array(
+            'River' => 1,
+            'Lake' => 2,
+            'Ocean' => 4,
+            'Boat' => 8,
+            'Shore' => 16,
+            'Drift' => 32,
+            'Night' => 64,
+            'Ice' => 128,
+            'Cave' => 256,
+            'Deco' => 512,
+        )
+    );
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -45,31 +62,55 @@ class DiveLogType extends AbstractType
             ->add('tanksize', TextType::class)
             ->add('airpressurestart', TextType::class, array('label' => 'Start Bar.' ))
             ->add('airpressureend', TextType::class, array('label' => 'End Bar' ))
-//            ->add('environment', ChoiceType::class, array('multiple' => true, 'expanded' => true,
-//                'choices' => array(
-//                    'River' => 1,
-//                    'Lake' => 2,
-//                    'Ocean' => 4,
-//                    'Boat' => 8,
-//                    'Shore' => 16,
-//                    'Drift' => 32,
-//                    'Night' => 64,
-//                    'Ice' => 128,
-//                    'Cave' => 256,
-//                    'Deco' => 512,
-//                )
-//            ))
-//            ->add('tides', ChoiceType::class, array('multiple' => true, 'expanded' => true,
-//                'choices' => array(
-//                    'Waves' => 1,
-//                    'Surf' => 2,
-//                    'Surge' => 4,
-//                    'Swells' => 8,
-//                    'Mild Current' => 16,
-//                    'Strong Current' => 32,
-//                )
-//            ))
-        ;
+            ->add('environment', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+                'choices' => array(
+                    'River' => 1,
+                    'Lake' => 2,
+                    'Ocean' => 4,
+                    'Boat' => 8,
+                    'Shore' => 16,
+                    'Drift' => 32,
+                    'Night' => 64,
+                    'Ice' => 128,
+                    'Cave' => 256,
+                    'Deco' => 512,
+                )
+            ))
+            ->add('tide', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+                'choices' => array(
+                    'Waves' => 1,
+                    'Surf' => 2,
+                    'Surge' => 4,
+                    'Swells' => 8,
+                    'Mild Current' => 16,
+                    'Strong Current' => 32,
+                )
+            ));
+
+        $builder->get('environment')
+            ->addModelTransformer(new BinaryValueToArrayTransformer(
+                function ($binaryValueAsArray) {
+                    // transform the binary value to an array
+                    return $binaryValueAsArray;
+                },
+                function ($arrayAsBinaryValue) {
+                    // transform the string back to an array
+                    return $arrayAsBinaryValue;
+                }
+        ));
+
+        $builder->get('tide')
+            ->addModelTransformer(new BinaryValueToArrayTransformer(
+                function ($binaryValueAsArray) {
+                    // transform the binary value to an array
+                    return $binaryValueAsArray;
+                },
+                function ($arrayAsBinaryValue) {
+                    // transform the string back to an array
+                    return $arrayAsBinaryValue;
+                }
+        ));
+
     }
 
     /**
