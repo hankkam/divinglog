@@ -18,6 +18,19 @@
     cursor: pointer;
 }
 
+#range {
+    height: 33px;
+}
+
+#show-dive-site-details {
+    display: none;
+}
+
+.btn-search-dive-sites {
+    background-color: #337ab7;
+    color: #ffffff;
+}
+
 #map {
     height: 0px;
 }

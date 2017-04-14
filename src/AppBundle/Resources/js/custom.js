@@ -2,8 +2,6 @@ var diveData = null;
 
 $(document).ready(function() {
 
-    $('#map').toggle();
-
     $('#dataTables-example').DataTable({
         responsive: true
     });
@@ -13,54 +11,28 @@ $(document).ready(function() {
     $("button[data-toggle=collapse]").click(function(){
         $(this).find('span:first').toggleClass('glyphicon-chevron-down glyphicon-chevron-up')
     });
-
     $(".btn-add").click(onAddRow);
-    $('.btn-remove').click(onRowRemove);
 
+    $('.btn-remove').click(onRowRemove);
     $('.btn-clear-result').click(clearResult);
-    $('.btn-show-map').click(onClickMap);
 
     $('.btn-search-dive-sites').click(function(e) {
+
+        if ($('#dive_log_country').val() === '') {
+
+            return;
+        }
+
+
         $.ajax({
-            url: "/app_dev.php/map/geolocation",
-            data: {
-                country: $('#dive_log_country').val(),
-                location: $('#dive_log_location').val(),
-                range: $('#range').val()
-            },
-            success: function (result) {
-
-                diveData = result['data'];
-
-                    var html = '<div id="nearest_dive_sites">' +
-                        '<div class="form-group select-list">' +
-                            '<label>Select the dive site or fill in the dive site name</label>' +
-                            '<div class="table-responsive">' +
-                            '<table class="table table-striped table-bordered table-hover">' +
-                                '<thead>' +
-                                    '<tr><th>#</th>' +
-                                    '<th>Dive site name</th>' +
-                                    '<th>Latitude</th>' +
-                                    '<th>Longitude</th>' +
-                                    '<th>Distance from selected country and location in Nautical miles (NM)</th>' +
-                                    '<th>Kilometers (KM)</th>' +
-                                    '</tr></thead><tbody>';
-
-                    var i = 1;
-                    $.each(result['data'], function(key, value) {
-
-                        html = html + '<tr onclick="onClickRow(' + key + ')" class="btn-set-dive-site"><td>' + i + '</td>' +
-                            '<td>' + value['name'] + '</td>' +
-                            '<td>' + value['lat'] + '</td>' +
-                            '<td>' + value['lng'] + '</td>' +
-                            '<td>' + value['distance'] + '</td>' +
-                            '<td>' + (value['distance'] * 1.85200).toFixed(2) + '</td>' +
-                            '</tr>';
-                        i = i + 1;
-
-                    });
-                    html = html + '</tbody></table></div></div></div>';
-                    $('#diveSites').html(html);
+        url: "/app_dev.php/map/geolocation",
+        data: {
+        country: $('#dive_log_country').val(),
+        location: $('#dive_log_location').val(),
+        range: $('#range').val()
+        },
+        success: function (result) {
+                buildMap(result['data']);
             }
         });
 
@@ -68,18 +40,6 @@ $(document).ready(function() {
 
 
 });
-
-function onClickMap() {
-
-    $('#map').toggle();
-
-    var data = {};
-    data['lat']  = $('#dive_log_lat').val();
-    data['lng']  = $('#dive_log_lng').val();
-    data['name'] = $('#dive_log_diveSite').val();
-
-    initMap(data);
-}
 
 function onClickRow(key) {
 
@@ -93,38 +53,59 @@ function onClickRow(key) {
         $('#dive_log_location').val(data['name']);
     }
     $("#nearest_dive_sites").remove();
-
-    initMap(data)
 }
 
 function clearResult() {
+    $('#show-dive-site-details').hide();
     $('#nearest_dive_sites').remove();
     $('#map').css('height', '0px');
-    $('#map').css('width', '0px');
     $('#dive_log_country').val('');
     $('#dive_log_location').val('');
     $('#range').val('');
-    $('#dive_log_divesite').val('');
+    $('#dive_log_diveSite').val('');
     $('#dive_log_lat').val('');
     $('#dive_log_lng').val('');
 }
 
-function initMap(data) {
+function buildMap(locations) {
 
-    $('#map').css('height', '400px');
+    $('#show-dive-site-details').show();
+    $('#map').css('height', '500px');
 
-    var myLatLng = {lat: parseFloat(data['lat']), lng: parseFloat(data['lng'])};
-
+    var latLngFirst = {lat: parseFloat(locations[0]['lat']), lng: parseFloat(locations[0]['lng'])};
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: myLatLng
+         zoom: 12,
+         center: latLngFirst
     });
 
-    var marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      title: data['name'],
+    var infowindow = new google.maps.InfoWindow();
+
+    Object.keys(locations).forEach(function(key) {
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[key]['lat'], locations[key]['lng']),
+            map: map
+        });
+
+        marker.addListener('mouseover', function() {
+            infowindow.setContent(locations[key]['name']);
+            infowindow.open(map, this);
+        });
+
+        marker.addListener('mouseout', function() {
+            infowindow.close();
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, key) {
+            return function() {
+                $('#dive_log_diveSite').val(locations[key]['name']);
+                $('#dive_log_lat').val(locations[key]['lat']);
+                $('#dive_log_lng').val(locations[key]['lng']);
+                $('#dive_log_location').val(locations[key]['name']);
+            }
+        })(marker, key));
     });
+
 }
 
 function onRowRemove() {
