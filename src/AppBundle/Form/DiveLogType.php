@@ -53,15 +53,22 @@ class DiveLogType extends AbstractType
             ->add('diveSite', TextType::class, array('label' => 'Dive site name'))
             ->add('lat', TextType::class, array('required' => false, 'label' => 'Latitude'))
             ->add('lng', TextType::class, array('required' => false, 'label' => 'Longitude'))
-            ->add('airtemperature', TextType::class, array('label' => 'Air temp.'))
-            ->add('watertemperature', TextType::class, array('label' => 'Water temp.'))
-            ->add('altitude', TextType::class)
-            ->add('visibility', TextType::class)
-            ->add('weight', TextType::class)
-            ->add('tank', TextType::class)
-            ->add('tanksize', TextType::class)
-            ->add('airpressurestart', TextType::class, array('label' => 'Start Bar.' ))
-            ->add('airpressureend', TextType::class, array('label' => 'End Bar' ))
+            ->add('airtemperature', TextType::class, array('label' => 'Air temp.', 'required' => false))
+            ->add('watertemperature', TextType::class, array('label' => 'Water temp.', 'required' => false))
+            ->add('altitude', TextType::class, array('required' => false))
+            ->add('visibility', TextType::class, array('required' => false))
+            ->add('weight', TextType::class, array('required' => false))
+            ->add('tank', ChoiceType::class, array(
+                'choices' => array(
+                    'aluminium' => 'Aluminium',
+                    'steel' => 'Steel',
+                ),
+                'expanded' => true,
+                'required' => false,
+            ))
+            ->add('tanksize', TextType::class, array('required' => false))
+            ->add('airpressurestart', TextType::class, array('label' => 'Start Bar.', 'required' => false))
+            ->add('airpressureend', TextType::class, array('label' => 'End Bar', 'required' => false))
             ->add('environment', ChoiceType::class, array('multiple' => true, 'expanded' => true,
                 'choices' => array(
                     'River' => 1,

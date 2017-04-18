@@ -16,13 +16,27 @@ $(document).ready(function() {
     $('.btn-remove').click(onRowRemove);
     $('.btn-clear-result').click(clearResult);
 
+    if ($('#dive_log_diveSite').val() !== '') {
+        $('#show-dive-site-details').show();
+        $.ajax({
+            url: "/app_dev.php/map/geolocation",
+            data: {
+                country: $('#dive_log_country').val(),
+                location: $('#dive_log_location').val(),
+                range: $('#range').val()
+            },
+            success: function (result) {
+                buildMap(result['data']);
+            }
+        });
+    }
+
     $('.btn-search-dive-sites').click(function(e) {
 
         if ($('#dive_log_country').val() === '') {
 
             return;
         }
-
 
         $.ajax({
         url: "/app_dev.php/map/geolocation",
@@ -79,12 +93,30 @@ function buildMap(locations) {
     });
 
     var infowindow = new google.maps.InfoWindow();
+    var geocoder = new google.maps.Geocoder;
 
     Object.keys(locations).forEach(function(key) {
 
+        var flagicon = {
+            url: 'http://divinglog.admin/images/dive-flag-blue.png',
+            scaledSize: new google.maps.Size(40, 40),
+            origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(0, 0)
+        };
+
+        if ($('#dive_log_lat').val() === locations[key]['lat'] && $('#dive_log_lng').val() === locations[key]['lng']) {
+            flagicon = {
+                url: 'http://divinglog.admin/images/dive-flag-red.png',
+                scaledSize: new google.maps.Size(40, 40),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0, 0)
+            };
+        }
+
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[key]['lat'], locations[key]['lng']),
-            map: map
+            map: map,
+            icon: flagicon
         });
 
         marker.addListener('mouseover', function() {
@@ -98,14 +130,30 @@ function buildMap(locations) {
 
         google.maps.event.addListener(marker, 'click', (function(marker, key) {
             return function() {
+                geocodeLatLng(geocoder, locations[key]['lat'], locations[key]['lng']);
                 $('#dive_log_diveSite').val(locations[key]['name']);
                 $('#dive_log_lat').val(locations[key]['lat']);
                 $('#dive_log_lng').val(locations[key]['lng']);
-                $('#dive_log_location').val(locations[key]['name']);
+
             }
         })(marker, key));
     });
+}
 
+function geocodeLatLng(geocoder, lat, lng) {
+
+    var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+    geocoder.geocode({'location': latlng}, function(results, status) {
+        if (status === 'OK') {
+            if (results) {
+                $('#dive_log_location').val(results[1]['formatted_address']);
+            } else {
+                window.alert('No results found');
+            }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
 }
 
 function onRowRemove() {
