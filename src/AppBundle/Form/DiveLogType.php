@@ -49,7 +49,7 @@ class DiveLogType extends AbstractType
             ->add('timeout', TimeType::class, array('label' => 'Time out', 'data' => new \DateTime('now')))
             ->add('date', DateType::class, array('data' => new \DateTime('now')))
             ->add('country', CountryType::class, array('placeholder' => 'Choose a country...',))
-            ->add('location', TextType::class)
+            ->add('location', TextType::class, array('label' => 'Nearest city'))
             ->add('diveSite', TextType::class, array('label' => 'Dive site name'))
             ->add('lat', TextType::class, array('required' => false, 'label' => 'Latitude'))
             ->add('lng', TextType::class, array('required' => false, 'label' => 'Longitude'))

@@ -3,7 +3,8 @@ var diveData = null;
 $(document).ready(function() {
 
     $('#dataTables-example').DataTable({
-        responsive: true
+        responsive: true,
+        'order': [[ 0, 'desc' ]]
     });
 
     $('.flash-message .alert-success').delay( 3000 ).slideUp( 400 );

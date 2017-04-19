@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: controllers.yml }
+    - { resource: services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -119,10 +120,6 @@ assetic:
                 - '@AppBundle/Resources/js/sb-admin-2/plugins/dataTables/dataTables.responsive.js'
                 - '@AppBundle/Resources/js/sb-admin-2/sb-admin-2.js'
                 - '@AppBundle/Resources/js/custom.js'
-
-        custom-images:
-            inputs: '@AppBundle/Resources/images/diveflag.png'
-            output: 'images/diveflag.png'
 
         font-awesome-otf:
             inputs: '@AppBundle/Resources/fonts/font-awesome/FontAwesome.otf'
