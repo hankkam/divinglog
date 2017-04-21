@@ -69,6 +69,15 @@ class DiveLogType extends AbstractType
             ->add('tanksize', TextType::class, array('required' => false))
             ->add('airpressurestart', TextType::class, array('label' => 'Start Bar.', 'required' => false))
             ->add('airpressureend', TextType::class, array('label' => 'End Bar', 'required' => false))
+//            ->add('purpose', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+//                'choices' => array(
+//                    'Recreation' => 1,
+//                    'Training' => 2,
+//                    'Instruction' => 4,
+//                    'Guiding' => 8,
+//                    'Commercial' => 16,
+//                )
+//            ))
             ->add('environment', ChoiceType::class, array('multiple' => true, 'expanded' => true,
                 'choices' => array(
                     'River' => 1,
@@ -81,8 +90,23 @@ class DiveLogType extends AbstractType
                     'Ice' => 128,
                     'Cave' => 256,
                     'Deco' => 512,
+                    'Wreck' => 1024,
+                    'Altitude' => 2048,
                 )
             ))
+//            ->add('weather', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+//                'choices' => array(
+//                    'Clear' => 1,
+//                    'Clouds' => 2,
+//                    'Rain' => 4,
+//                    'Snow' => 8,
+//                    'Mist' => 16,
+//                    'Fog' => 32,
+//                    'Storm' => 64,
+//                    'Mild wind' => 128,
+//                    'Strong wind' => 256,
+//                )
+//            ))
             ->add('tide', ChoiceType::class, array('multiple' => true, 'expanded' => true,
                 'choices' => array(
                     'Waves' => 1,
@@ -92,7 +116,44 @@ class DiveLogType extends AbstractType
                     'Mild Current' => 16,
                     'Strong Current' => 32,
                 )
-            ));
+            ))
+//            ->add('bottom', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+//                'choices' => array(
+//                    'Silt' => 1,
+//                    'Mud' => 2,
+//                    'Sand' => 4,
+//                    'Rock' => 8,
+//                    'Coral' => 16,
+//                    'Grass' => 32,
+//                    'Clay' => 64,
+//                    'Debris' => 128,
+//                    'Slope' => 256,
+//                    'Wall' => 512,
+//                    'Drop-off' => 1024,
+//                    'none' => 2048,
+//                )
+//            ))
+//            ->add('protection', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+//                'choices' => array(
+//                    'Skin' => 1,
+//                    'Wetsuit' => 2,
+//                    'Shorty' => 4,
+//                    'Drysuit' => 8,
+//                    'Hood' => 16,
+//                    'Gloves' => 32,
+//                    'Boots' => 64,
+//                )
+//            ))
+//            ->add('air', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+//                'choices' => array(
+//                    'Pressed air' => 1,
+//                    'Nitrox' => 2,
+//                    'Trimex' => 4,
+//                    'Other' => 8,
+//                )
+//            ))
+        ;
+
 
         $builder->get('environment')
             ->addModelTransformer(new BinaryValueToArrayTransformer(

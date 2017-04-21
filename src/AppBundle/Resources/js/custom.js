@@ -89,7 +89,7 @@ function buildMap(locations) {
 
     var latLngFirst = {lat: parseFloat(locations[0]['lat']), lng: parseFloat(locations[0]['lng'])};
     var map = new google.maps.Map(document.getElementById('map'), {
-         zoom: 12,
+         zoom: 10,
          center: latLngFirst
     });
 
@@ -98,26 +98,30 @@ function buildMap(locations) {
 
     Object.keys(locations).forEach(function(key) {
 
-        var flagicon = {
-            url: 'http://divinglog.admin/images/dive-flag-blue.png',
-            scaledSize: new google.maps.Size(40, 40),
-            origin: new google.maps.Point(0,0),
-            anchor: new google.maps.Point(0, 0)
-        };
+        // var flagMarker = {
+        //     url: 'http://divinglog.admin/images/flag-blue-40px.png',
+        //     scaledSize: new google.maps.Size(40, 40),
+        //     origin: new google.maps.Point(0,0),
+        //     anchor: new google.maps.Point(0, 0)
+        // };
+
+        var flagMarker = 'http://divinglog.admin/images/flag-blue-30px.png';
 
         if ($('#dive_log_lat').val() === locations[key]['lat'] && $('#dive_log_lng').val() === locations[key]['lng']) {
-            flagicon = {
-                url: 'http://divinglog.admin/images/dive-flag-red.png',
-                scaledSize: new google.maps.Size(40, 40),
-                origin: new google.maps.Point(0,0),
-                anchor: new google.maps.Point(0, 0)
-            };
+
+            var flagMarker = 'http://divinglog.admin/images/flag-red-30px.png';
+            // flagMarker = {
+            //     url: 'http://divinglog.admin/images/flag-red-40px.png',
+            //     scaledSize: new google.maps.Size(40, 40),
+            //     origin: new google.maps.Point(0,0),
+            //     anchor: new google.maps.Point(0, 0)
+            // };
         }
 
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[key]['lat'], locations[key]['lng']),
             map: map,
-            icon: flagicon
+            icon: flagMarker
         });
 
         marker.addListener('mouseover', function() {
