@@ -98,24 +98,20 @@ function buildMap(locations) {
 
     Object.keys(locations).forEach(function(key) {
 
-        // var flagMarker = {
-        //     url: 'http://divinglog.admin/images/flag-blue-40px.png',
-        //     scaledSize: new google.maps.Size(40, 40),
-        //     origin: new google.maps.Point(0,0),
-        //     anchor: new google.maps.Point(0, 0)
-        // };
-
-        var flagMarker = 'http://divinglog.admin/images/flag-blue-30px.png';
+        var flagMarker = {
+            url: 'http://divinglog.admin/images/flag-blue.svg',
+            scaledSize: new google.maps.Size(30, 30),
+            origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(0, 0)
+        };
 
         if ($('#dive_log_lat').val() === locations[key]['lat'] && $('#dive_log_lng').val() === locations[key]['lng']) {
-
-            var flagMarker = 'http://divinglog.admin/images/flag-red-30px.png';
-            // flagMarker = {
-            //     url: 'http://divinglog.admin/images/flag-red-40px.png',
-            //     scaledSize: new google.maps.Size(40, 40),
-            //     origin: new google.maps.Point(0,0),
-            //     anchor: new google.maps.Point(0, 0)
-            // };
+            flagMarker = {
+                url: 'http://divinglog.admin/images/flag-red.svg',
+                scaledSize: new google.maps.Size(30, 30),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0, 0)
+            };
         }
 
         marker = new google.maps.Marker({
