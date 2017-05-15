@@ -68,28 +68,28 @@ class DiveLog
     /**
      * @var int
      *
-     * @ORM\Column(name="airtemperature", type="integer")
+     * @ORM\Column(name="airtemperature", type="integer", nullable=true)
      */
     private $airTemperature;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="watertemperature", type="integer")
+     * @ORM\Column(name="watertemperature", type="integer", nullable=true)
      */
     private $waterTemperature;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="altitude", type="integer")
+     * @ORM\Column(name="altitude", type="integer", nullable=true)
      */
     private $altitude;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="visibility", type="integer")
+     * @ORM\Column(name="visibility", type="integer", nullable=true)
      */
     private $visibility;
 
@@ -122,23 +122,30 @@ class DiveLog
     private $airPressureEnd;
 
     /**
-     * @var
+     * @var string
      *
-     * @ORM\Column(name="tank", type="string", columnDefinition="enum('aluminium', 'steel')")
+     * @ORM\Column(name="tank", type="string", columnDefinition="enum('Aluminium', 'Steel', 'Twin-tanks')", nullable=true)
      */
     private $tank;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tanksize", type="string", columnDefinition="enum('5', '10', '12', '15', 'unknown')")
+     * @ORM\Column(name="tanksize", type="string", columnDefinition="enum('5', '5.7', '7', '8', '10', '12', '15', '2x7', '2x10', '2x12')", nullable=true)
      */
     private $tankSize;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="weight", type="integer")
+     * @ORM\Column(name="air", type="string", columnDefinition="enum('Pressed air', 'Nitrox', 'Trimex', 'Heliox', 'Other')", nullable=true)
+     */
+    private $air;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="weight", type="string", nullable=true)
      */
     private $weight;
 
@@ -159,16 +166,44 @@ class DiveLog
     /**
      * @var int
      *
-     * @ORM\Column(name="environment", type="integer")
+     * @ORM\Column(name="environment", type="integer", nullable=true)
      */
     private $environment;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="tide", type="integer")
+     * @ORM\Column(name="tide", type="integer", nullable=true)
      */
     private $tide;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="purpose", type="integer", nullable=true)
+     */
+    private $purpose;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="weather", type="integer", nullable=true)
+     */
+    private $weather;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="bottom", type="integer", nullable=true)
+     */
+    private $bottom;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="protection", type="integer", nullable=true)
+     */
+    private $protection;
 
     /**
      * @return int
@@ -602,6 +637,106 @@ class DiveLog
     public function setTide($tide)
     {
         $this->tide = $tide;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPurpose()
+    {
+        return $this->purpose;
+    }
+
+    /**
+     * @param int $purpose
+     *
+     * @return $this
+     */
+    public function setPurpose($purpose)
+    {
+        $this->purpose = $purpose;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeather()
+    {
+        return $this->weather;
+    }
+
+    /**
+     * @param int $weather
+     *
+     * @return $this
+     */
+    public function setWeather($weather)
+    {
+        $this->weather = $weather;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBottom()
+    {
+        return $this->bottom;
+    }
+
+    /**
+     * @param int $bottom
+     *
+     * @return $this
+     */
+    public function setBottom($bottom)
+    {
+        $this->bottom = $bottom;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProtection()
+    {
+        return $this->protection;
+    }
+
+    /**
+     * @param int $protection
+     *
+     * @return $this
+     */
+    public function setProtection($protection)
+    {
+        $this->protection = $protection;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAir()
+    {
+        return $this->air;
+    }
+
+    /**
+     * @param int $air
+     *
+     * @return $this
+     */
+    public function setAir($air)
+    {
+        $this->air = $air;
 
         return $this;
     }

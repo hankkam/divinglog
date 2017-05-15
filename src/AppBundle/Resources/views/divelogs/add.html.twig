@@ -43,7 +43,6 @@
                             </div>
                         </div>
                         <div class="col-lg-10">
-                            <h3>Search dive site</h3>
                             <div class="form-group">
                                 <div class="col-xs-3">
                                     {{ form_row(form.country) }}
@@ -144,14 +143,10 @@
                                     {{ form_row(form.visibility) }}
                                     <p class="help-block"></p>
                                 </div>
-                                <div class="col-xs-1">
-                                    {{ form_row(form.tank) }}
-                                    <p class="help-block"></p>
-                                </div>
-                                <div class="col-xs-1">
-                                    {{ form_row(form.tanksize) }}
-                                    <p class="help-block"></p>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
                                 <div class="col-xs-1">
                                     {{ form_row(form.weight) }}
                                     <p class="help-block"></p>
@@ -164,15 +159,39 @@
                                     {{ form_row(form.airpressureend) }}
                                     <p class="help-block"></p>
                                 </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.tanksize) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.tank) }}
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.air) }}
+                                    <p class="help-block"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <div class="col-xs-2">
+                                <div class="col-xs-1">
+                                    {{ form_row(form.purpose) }}
+                                </div>
+                                <div class="col-xs-1">
                                     {{ form_row(form.environment) }}
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-1">
+                                    {{ form_row(form.bottom) }}
+                                </div>
+                                <div class="col-xs-1">
                                     {{ form_row(form.tide) }}
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.weather) }}
+                                </div>
+                                <div class="col-xs-1">
+                                    {{ form_row(form.protection) }}
                                 </div>
                             </div>
                         </div>

@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Form\DataTransformer\BinaryValueToArrayTransformer;
+use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,22 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class DiveLogType extends AbstractType
 {
-    /** @var array  */
-    private $choices = array(
-        'choices' => array(
-            'River' => 1,
-            'Lake' => 2,
-            'Ocean' => 4,
-            'Boat' => 8,
-            'Shore' => 16,
-            'Drift' => 32,
-            'Night' => 64,
-            'Ice' => 128,
-            'Cave' => 256,
-            'Deco' => 512,
-        )
-    );
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -57,11 +42,39 @@ class DiveLogType extends AbstractType
             ->add('watertemperature', TextType::class, array('label' => 'Water temp.', 'required' => false))
             ->add('altitude', TextType::class, array('required' => false))
             ->add('visibility', TextType::class, array('required' => false))
-            ->add('weight', TextType::class, array('required' => false))
+            ->add('weight', TextType::class, array('label' => 'Weight (kg)', 'required' => false))
             ->add('tank', ChoiceType::class, array(
                 'choices' => array(
-                    'aluminium' => 'Aluminium',
-                    'steel' => 'Steel',
+                    'Aluminium' => 'Aluminium',
+                    'Steel' => 'Steel',
+                    'Twin-tanks' => 'Twin-tanks',
+                ),
+                'expanded' => true,
+                'required' => false,
+            ))
+            ->add('tanksize', ChoiceType::class, array('label' => 'Tanksize (L)',
+                'choices' => array(
+                    '5' => '5',
+                    '5.7' => '5.7',
+                    '7' => '7',
+                    '8' => '8',
+                    '10' => '10',
+                    '12' => '12',
+                    '15' => '15',
+                    '2x7' => '2x7',
+                    '2x10' => '2x10',
+                    '2x12' => '2x12',
+                ),
+                'expanded' => true,
+                'required' => false,
+            ))
+            ->add('air', ChoiceType::class, array(
+                'choices' => array(
+                    'Pressed air' => 'Pressed air',
+                    'Nitrox' => 'Nitrox',
+                    'Trimix' => 'Trimix',
+                    'Heliox' => 'Heliox',
+                    'Other' => 'Other',
                 ),
                 'expanded' => true,
                 'required' => false,
@@ -69,15 +82,15 @@ class DiveLogType extends AbstractType
             ->add('tanksize', TextType::class, array('required' => false))
             ->add('airpressurestart', TextType::class, array('label' => 'Start Bar.', 'required' => false))
             ->add('airpressureend', TextType::class, array('label' => 'End Bar', 'required' => false))
-//            ->add('purpose', ChoiceType::class, array('multiple' => true, 'expanded' => true,
-//                'choices' => array(
-//                    'Recreation' => 1,
-//                    'Training' => 2,
-//                    'Instruction' => 4,
-//                    'Guiding' => 8,
-//                    'Commercial' => 16,
-//                )
-//            ))
+            ->add('purpose', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+                'choices' => array(
+                    'Recreation' => 1,
+                    'Training' => 2,
+                    'Instruction' => 4,
+                    'Guiding' => 8,
+                    'Commercial' => 16,
+                )
+            ))
             ->add('environment', ChoiceType::class, array('multiple' => true, 'expanded' => true,
                 'choices' => array(
                     'River' => 1,
@@ -94,19 +107,19 @@ class DiveLogType extends AbstractType
                     'Altitude' => 2048,
                 )
             ))
-//            ->add('weather', ChoiceType::class, array('multiple' => true, 'expanded' => true,
-//                'choices' => array(
-//                    'Clear' => 1,
-//                    'Clouds' => 2,
-//                    'Rain' => 4,
-//                    'Snow' => 8,
-//                    'Mist' => 16,
-//                    'Fog' => 32,
-//                    'Storm' => 64,
-//                    'Mild wind' => 128,
-//                    'Strong wind' => 256,
-//                )
-//            ))
+            ->add('weather', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+                'choices' => array(
+                    'Clear' => 1,
+                    'Clouds' => 2,
+                    'Rain' => 4,
+                    'Snow' => 8,
+                    'Mist' => 16,
+                    'Fog' => 32,
+                    'Storm' => 64,
+                    'Mild wind' => 128,
+                    'Strong wind' => 256,
+                )
+            ))
             ->add('tide', ChoiceType::class, array('multiple' => true, 'expanded' => true,
                 'choices' => array(
                     'Waves' => 1,
@@ -117,43 +130,34 @@ class DiveLogType extends AbstractType
                     'Strong Current' => 32,
                 )
             ))
-//            ->add('bottom', ChoiceType::class, array('multiple' => true, 'expanded' => true,
-//                'choices' => array(
-//                    'Silt' => 1,
-//                    'Mud' => 2,
-//                    'Sand' => 4,
-//                    'Rock' => 8,
-//                    'Coral' => 16,
-//                    'Grass' => 32,
-//                    'Clay' => 64,
-//                    'Debris' => 128,
-//                    'Slope' => 256,
-//                    'Wall' => 512,
-//                    'Drop-off' => 1024,
-//                    'none' => 2048,
-//                )
-//            ))
-//            ->add('protection', ChoiceType::class, array('multiple' => true, 'expanded' => true,
-//                'choices' => array(
-//                    'Skin' => 1,
-//                    'Wetsuit' => 2,
-//                    'Shorty' => 4,
-//                    'Drysuit' => 8,
-//                    'Hood' => 16,
-//                    'Gloves' => 32,
-//                    'Boots' => 64,
-//                )
-//            ))
-//            ->add('air', ChoiceType::class, array('multiple' => true, 'expanded' => true,
-//                'choices' => array(
-//                    'Pressed air' => 1,
-//                    'Nitrox' => 2,
-//                    'Trimex' => 4,
-//                    'Other' => 8,
-//                )
-//            ))
+            ->add('bottom', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+                'choices' => array(
+                    'Silt' => 1,
+                    'Mud' => 2,
+                    'Sand' => 4,
+                    'Rock' => 8,
+                    'Coral' => 16,
+                    'Grass' => 32,
+                    'Clay' => 64,
+                    'Debris' => 128,
+                    'Slope' => 256,
+                    'Wall' => 512,
+                    'Drop-off' => 1024,
+                    'none' => 2048,
+                )
+            ))
+            ->add('protection', ChoiceType::class, array('multiple' => true, 'expanded' => true,
+                'choices' => array(
+                    'Skin' => 1,
+                    'Wetsuit' => 2,
+                    'Shorty' => 4,
+                    'Drysuit' => 8,
+                    'Hood' => 16,
+                    'Gloves' => 32,
+                    'Boots' => 64,
+                )
+            ))
         ;
-
 
         $builder->get('environment')
             ->addModelTransformer(new BinaryValueToArrayTransformer(
@@ -179,6 +183,53 @@ class DiveLogType extends AbstractType
                 }
         ));
 
+        $builder->get('purpose')
+            ->addModelTransformer(new BinaryValueToArrayTransformer(
+                function ($binaryValueAsArray) {
+                    // transform the binary value to an array
+                    return $binaryValueAsArray;
+                },
+                function ($arrayAsBinaryValue) {
+                    // transform the string back to an array
+                    return $arrayAsBinaryValue;
+                }
+        ));
+
+        $builder->get('weather')
+            ->addModelTransformer(new BinaryValueToArrayTransformer(
+                function ($binaryValueAsArray) {
+                    // transform the binary value to an array
+                    return $binaryValueAsArray;
+                },
+                function ($arrayAsBinaryValue) {
+                    // transform the string back to an array
+                    return $arrayAsBinaryValue;
+                }
+        ));
+
+        $builder->get('bottom')
+            ->addModelTransformer(new BinaryValueToArrayTransformer(
+                function ($binaryValueAsArray) {
+                    // transform the binary value to an array
+                    return $binaryValueAsArray;
+                },
+                function ($arrayAsBinaryValue) {
+                    // transform the string back to an array
+                    return $arrayAsBinaryValue;
+                }
+        ));
+
+        $builder->get('protection')
+            ->addModelTransformer(new BinaryValueToArrayTransformer(
+                function ($binaryValueAsArray) {
+                    // transform the binary value to an array
+                    return $binaryValueAsArray;
+                },
+                function ($arrayAsBinaryValue) {
+                    // transform the string back to an array
+                    return $arrayAsBinaryValue;
+                }
+         ));
     }
 
     /**
